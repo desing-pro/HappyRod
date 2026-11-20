@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Rod | Postres, Pasteles & Snacks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              50: '#FDFBF7',
+              100: '#FAF4EC',
+              200: '#F5EBE0',
+              300: '#EAD8C7',
+            },
+            terra: {
+              100: '#F8E3E6',
+              200: '#F4D0D6',
+              400: '#D49B93',
+              500: '#C68B82',
+              600: '#B87A72',
+              700: '#9A6159',
+            },
+            choco: {
+              700: '#5C4332',
+              800: '#4A3525',
+              900: '#3B281B',
+            },
+            sage: {
+              100: '#EBF0E9',
+              300: '#B8C9B4',
+              500: '#8FA889',
+              600: '#748E6E',
+            },
+            gold: {
+              400: '#E0B589',
+              500: '#D4A373',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Quicksand"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #FAF4EC;
+      color: #4A3525;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(244, 208, 214, 0.25) 0%, transparent 38%),
+        radial-gradient(circle at 88% 75%, rgba(143, 168, 137, 0.16) 0%, transparent 42%),
+        radial-gradient(circle at 50% 50%, rgba(245, 235, 224, 0.6) 0%, transparent 70%);
+      background-attachment: fixed;
+    }
+    .font-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .card-paper {
+      background: rgba(255, 253, 250, 0.92);
+      border: 1px solid rgba(198, 139, 130, 0.28);
+      box-shadow: 0 10px 25px -8px rgba(74, 53, 37, 0.08);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #C68B82 0%, #B87A72 100%);
+      color: #FFFDF9;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #B87A72 0%, #9A6159 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(184, 122, 114, 0.32);
+    }
+    .btn-sage {
+      background: linear-gradient(135deg, #8FA889 0%, #748E6E 100%);
+      color: #FFFDF9;
+      transition: all 0.2s ease;
+    }
+    .btn-sage:hover {
+      filter: brightness(0.95);
+      transform: translateY(-1px);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #F5EBE0; }
+    ::-webkit-scrollbar-thumb { background: #D49B93; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #B87A72; }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(1.5deg); }
+    }
+    .animate-dino {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.92); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: popIn 0.22s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-terra-200 selection:text-choco-900">
+
+  <!-- Contenedor de Notificaciones Toast -->
+  <div id="toast-container" class="fixed top-20 right-4 z-[80] flex flex-col gap-2 max-w-xs w-full pointer-events-none"></div>
+
+  <!-- Barra de Navegación Superior -->
+  <header class="sticky top-0 z-40 bg-cream-100/95 backdrop-blur-md border-b border-terra-500/25 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
+      <!-- Marca y Mascota SVG -->
+      <button onclick="navigateTo('catalogo')" class="flex items-center gap-3 text-left group focus:outline-none">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-cream-50 border-2 border-terra-500/40 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+          <!-- SVG Mascota Dino Pastelero Happy Rod -->
+          <svg viewBox="0 0 120 120" class="w-11 h-11 sm:w-12 sm:h-12" aria-label="Dinosaurio Pastelero Happy Rod">
+            <!-- Gorro de chef -->
+            <path d="M44 26 C38 24, 37 15, 45 14 C48 9, 58 9, 61 14 C69 15, 68 24, 62 26 Z" fill="#FFFFFF" stroke="#4A3525" stroke-width="2.2"/>
+            <rect x="45" y="24" width="16" height="5" rx="2" fill="#F5EBE0" stroke="#4A3525" stroke-width="2"/>
+            <!-- Espinas lomo -->
+            <path d="M73 46 L81 42 L77 52 Z" fill="#D49B93" stroke="#4A3525" stroke-width="1.8"/>
+            <path d="M77 57 L86 55 L80 65 Z" fill="#D49B93" stroke="#4A3525" stroke-width="1.8"/>
+            <path d="M80 70 L89 70 L82 78 Z" fill="#D49B93" stroke="#4A3525" stroke-width="1.8"/>
+            <!-- Cola y cuerpo Dino -->
+            <path d="M38 66 C34 45, 42 29, 55 29 C68 29, 74 42, 75 58 C76 72, 84 82, 95 83 C88 92, 74 95, 62 95 L44 95 C37 95, 35 84, 38 66 Z" fill="#9BB395" stroke="#4A3525" stroke-width="2.4" stroke-linejoin="round"/>
+            <!-- Mejilla y Ojo -->
+            <circle cx="48" cy="42" r="2.6" fill="#3B281B"/>
+            <circle cx="47.2" cy="41.2" r="0.9" fill="#FFFFFF"/>
+            <ellipse cx="44" cy="47" rx="3.2" ry="2" fill="#F4D0D6"/>
+            <path d="M39 49 Q45 53 51 49" fill="none" stroke="#4A3525" stroke-width="2" stroke-linecap="round"/>
+            <!-- Mandil Rosado -->
+            <path d="M43 60 L64 60 L67 86 L40 86 Z" fill="#F8E3E6" stroke="#4A3525" stroke-width="2.2" stroke-linejoin="round"/>
+            <!-- Corazón en mandil -->
+            <path d="M53.5 70 C53.5 67.5, 49.5 67.5, 49.5 70.5 C49.5 73.5, 53.5 76, 53.5 76 C53.5 76, 57.5 73.5, 57.5 70.5 C57.5 67.5, 53.5 67.5, 53.5 70 Z" fill="#C68B82"/>
+            <!-- Batidor en mano izquierda -->
+            <line x1="34" y1="67" x2="26" y2="54" stroke="#4A3525" stroke-width="2.4" stroke-linecap="round"/>
+            <ellipse cx="22" cy="47" rx="5" ry="8" transform="rotate(-32 22 47)" fill="none" stroke="#4A3525" stroke-width="1.8"/>
+            <ellipse cx="22" cy="47" rx="2.5" ry="8" transform="rotate(-32 22 47)" fill="none" stroke="#4A3525" stroke-width="1.4"/>
+            <!-- Pastelito en mano derecha -->
+            <ellipse cx="75" cy="74" rx="11" ry="3.5" fill="#FFFFFF" stroke="#4A3525" stroke-width="1.8"/>
+            <rect x="68" y="65" width="14" height="8" rx="2" fill="#F4D0D6" stroke="#4A3525" stroke-width="1.8"/>
+            <circle cx="75" cy="63.5" r="2.5" fill="#C68B82"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-brand text-2xl sm:text-3xl font-bold tracking-tight text-choco-900 leading-none">happy rod</span>
+            <span class="text-terra-500 text-xs">♥</span>
+          </div>
+          <p class="text-[10px] sm:text-xs uppercase tracking-[0.18em] text-choco-700 font-semibold mt-0.5">Postres, Pasteles & Snacks</p>
+        </div>
+      </button>
+
+      <!-- Navegación Desktop -->
+      <nav class="hidden md:flex items-center gap-1.5 bg-cream-200/80 p-1.5 rounded-full border border-terra-500/20">
+        <button onclick="navigateTo('catalogo')" data-nav="catalogo" class="nav-btn px-4 py-1.5 rounded-full text-sm font-semibold transition-all">
+          Catálogo
+        </button>
+        <button onclick="navigateTo('cotizador')" data-nav="cotizador" class="nav-btn px-4 py-1.5 rounded-full text-sm font-semibold transition-all">
+          Cotizar Evento
+        </button>
+        <button onclick="openAdminGate()" data-nav="admin" class="nav-btn px-3.5 py-1.5 rounded-full text-sm font-semibold transition-all flex items-center gap-1 text-choco-700 hover:text-choco-900">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Admin
+        </button>
+      </nav>
+
+      <!-- Botones de Acción Derecha -->
+      <div class="flex items-center gap-2">
+        <button onclick="openAdminGate()" class="md:hidden p-2 rounded-full bg-cream-200 text-choco-800 border border-terra-500/20" title="Panel Administrador">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </button>
+
+        <button onclick="toggleCartDrawer(true)" class="relative btn-primary px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-2 font-bold text-sm shadow-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span class="hidden sm:inline">Mi Pedido</span>
+          <span id="header-cart-count" class="bg-cream-50 text-terra-600 text-xs font-extrabold px-2 py-0.5 rounded-full min-w-[22px] text-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL (VISTAS SPA) -->
+  <main class="flex-1 pb-24 md:pb-12">
+
+    <!-- ========================================================= -->
+    <!-- VISTA 1: CATÁLOGO Y TIENDA                                -->
+    <!-- ========================================================= -->
+    <section id="view-catalogo" class="view-section">
+      <!-- Hero Banner Artesanal -->
+      <div class="max-w-6xl mx-auto px-4 pt-5 sm:pt-8">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-cream-200 via-cream-100 to-terra-100 border border-terra-500/30 p-6 sm:p-10 shadow-md">
+          <!-- Ramita botánica decorativa SVG -->
+          <svg class="absolute top-0 left-0 w-36 h-36 text-terra-500/20 pointer-events-none" viewBox="0 0 150 150" fill="none">
+            <path d="M10 10 C45 35, 75 75, 110 125" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M35 32 C25 45, 22 55, 30 62 C38 55, 42 45, 35 32 Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M42 36 C56 30, 68 32, 70 42 C60 48, 48 46, 42 36 Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M62 62 C50 75, 48 88, 56 94 C65 86, 68 74, 62 62 Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M68 66 C82 60, 95 62, 96 72 C85 78, 74 75, 68 66 Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+
+          <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cream-50/90 border border-terra-500/30 text-terra-700 text-xs font-bold tracking-wide mb-3">
+                <span>♥</span> SABORES QUE CREAN RECUERDOS <span>♥</span>
+              </div>
+              <h1 class="font-brand text-3xl sm:text-5xl font-bold text-choco-900 leading-tight">
+                Postres que alegran el día, hechos con cariño artesanal
+              </h1>
+              <p class="mt-3 text-choco-700 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Disfruta nuestras hojarascas tradicionales azucaradas, charolitas de pastelitos individuales de sabores irresistibles y pasteles personalizados para tus momentos especiales.
+              </p>
+              <div class="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <a href="#seccion-menu" class="btn-primary px-6 py-3 rounded-full font-bold text-sm sm:text-base shadow-sm flex items-center gap-2">
+                  <span>Explorar Catálogo</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </a>
+                <button onclick="navigateTo('cotizador')" class="px-6 py-3 rounded-full font-bold text-sm sm:text-base bg-cream-50 text-choco-800 border-2 border-terra-500/40 hover:bg-terra-100/50 transition-all flex items-center gap-2">
+                  <span>✨ Cotizar Evento</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Tarjeta Promocional Destacada 3x2 -->
+            <div id="hero-promo-card" class="lg:col-span-5">
+              <div class="bg-gradient-to-br from-terra-100 to-cream-50 rounded-3xl p-5 sm:p-6 border-2 border-terra-400/50 shadow-lg relative overflow-hidden">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <span class="inline-block bg-terra-600 text-white text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                      ★ Promoción Estrella
+                    </span>
+                    <h2 class="font-brand text-2xl sm:text-3xl font-bold text-choco-900 mt-2">
+                      PROMO 3x2
+                    </h2>
+                    <p class="text-terra-700 font-bold text-sm">Lleva 3 Pastelitos y Paga 2</p>
+                  </div>
+                  <div class="bg-cream-50 border-2 border-terra-500/40 rounded-2xl px-3.5 py-2 text-center shadow-sm shrink-0">
+                    <span class="block text-[10px] uppercase font-bold text-choco-700">Precio</span>
+                    <span class="font-brand text-2xl sm:text-3xl font-extrabold text-terra-600">$150</span>
+                    <span class="block text-[10px] font-bold text-choco-700">por 3 pzas</span>
+                  </div>
+                </div>
+                <p class="text-xs text-choco-700 mt-3 leading-relaxed">
+                  Elige tus 3 sabores favoritos: <strong class="text-choco-900">Oreo, Nutella, Tortupay, Durazno, Mazapán, Bruce o Cajeta con nuez</strong>. ¡También aplica automático al agregar 3 pastelitos sueltos!
+                </p>
+                <button onclick="openProductModal('prod-promo-3x2')" class="mt-4 w-full btn-sage py-2.5 px-4 rounded-2xl font-bold text-sm shadow-sm flex items-center justify-center gap-2">
+                  <span>Armar mi Promo 3x2 ahora</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Catálogo de Productos -->
+      <div id="seccion-menu" class="max-w-6xl mx-auto px-4 mt-8 sm:mt-10">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-terra-600">Menú Artesanal</span>
+            <h2 class="font-brand text-2xl sm:text-3xl font-bold text-choco-900">Nuestros Postres & Precios</h2>
+          </div>
+
+          <!-- Filtros de Categoría -->
+          <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <!-- Generado por JS -->
+          </div>
+        </div>
+
+        <!-- Grid de Productos -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Renderizado dinámico -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VISTA 2: COTIZADOR INTERACTIVO DE EVENTOS                 -->
+    <!-- ========================================================= -->
+    <section id="view-cotizador" class="view-section hidden">
+      <div class="max-w-5xl mx-auto px-4 pt-6 sm:pt-8">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-sage-100 text-sage-600 text-xs font-bold uppercase tracking-wider mb-2">
+            Mesas de Postres & Eventos Especiales
+          </span>
+          <h1 class="font-brand text-3xl sm:text-4xl font-bold text-choco-900">Cotizador Interactivo Happy Rod</h1>
+          <p class="text-sm sm:text-base text-choco-700 mt-2">
+            Arma tu paquete a la medida para cumpleaños, reuniones o detalles corporativos. Calcula un estimado al instante y envíalo directo a nuestro WhatsApp.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Formulario Paso a Paso -->
+          <div class="lg:col-span-7 card-paper rounded-3xl p-5 sm:p-7 space-y-6">
+            <!-- Paso 1: Tipo de Evento y Personas -->
+            <div>
+              <h3 class="font-brand text-xl font-bold text-choco-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-terra-500 text-white text-sm font-sans flex items-center justify-center">1</span>
+                Detalles del Evento
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label class="block text-xs font-bold text-choco-800 mb-1">Tipo de Evento</label>
+                  <select id="quote-event-type" onchange="recalculateQuote()" class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-3.5 py-2.5 text-sm font-semibold text-choco-900 focus:outline-none focus:border-terra-500">
+                    <option value="">Selecciona el tipo de evento...</option>
+                    <option value="Cumpleaños">🎂 Cumpleaños</option>
+                    <option value="Reunión familiar">🏡 Reunión familiar</option>
+                    <option value="Mesa de postres">🍰 Mesa de postres / Dulces</option>
+                    <option value="Regalo corporativo">🎁 Regalo corporativo / Detalle</option>
+                    <option value="Otro evento">✨ Otro evento especial</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-choco-800 mb-1">Fecha aproximada del evento</label>
+                  <input type="date" id="quote-event-date" class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-3.5 py-2.5 text-sm font-semibold text-choco-900 focus:outline-none focus:border-terra-500">
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-bold text-choco-800">Invitados / Porciones estimadas</label>
+                  <span id="quote-guests-display" class="text-sm font-extrabold text-terra-600 bg-terra-100 px-3 py-0.5 rounded-full">0 personas</span>
+                </div>
+                <input type="range" id="quote-guests" min="0" max="150" step="5" value="0" oninput="updateGuestsSlider(this.value)" class="w-full accent-terra-500 cursor-pointer">
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <button type="button" onclick="setQuickGuests(15)" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-200 hover:bg-terra-100 text-choco-800 transition">15 pers.</button>
+                  <button type="button" onclick="setQuickGuests(30)" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-200 hover:bg-terra-100 text-choco-800 transition">30 pers.</button>
+                  <button type="button" onclick="setQuickGuests(50)" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-200 hover:bg-terra-100 text-choco-800 transition">50 pers.</button>
+                  <button type="button" onclick="setQuickGuests(80)" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-200 hover:bg-terra-100 text-choco-800 transition">80 pers.</button>
+                  <button type="button" onclick="setQuickGuests(100)" class="px-3 py-1 rounded-full text-xs font-bold bg-cream-200 hover:bg-terra-100 text-choco-800 transition">100+ pers.</button>
+                </div>
+              </div>
+            </div>
+
+            <hr class="border-terra-500/20">
+
+            <!-- Paso 2: Selección de Postres -->
+            <div>
+              <h3 class="font-brand text-xl font-bold text-choco-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-terra-500 text-white text-sm font-sans flex items-center justify-center">2</span>
+                Elige los Postres a Incluir
+              </h3>
+              <div class="space-y-3 mt-4">
+                <!-- Item A: Charolas de Galletas/Hojarascas -->
+                <div class="p-3.5 rounded-2xl bg-cream-50 border border-terra-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <p class="font-bold text-sm text-choco-900">Charolas de Hojarascas / Galletas (20 pzas c/u)</p>
+                    <p class="text-xs text-choco-700">$120 MXN por charola de 20 piezas</p>
+                  </div>
+                  <div class="flex items-center gap-2 self-end sm:self-center">
+                    <button type="button" onclick="adjustQuoteItem('galletas', -1)" class="w-8 h-8 rounded-full bg-cream-200 font-bold text-choco-900 hover:bg-terra-200">-</button>
+                    <span id="q-qty-galletas" class="w-8 text-center font-extrabold text-sm">0</span>
+                    <button type="button" onclick="adjustQuoteItem('galletas', 1)" class="w-8 h-8 rounded-full bg-terra-500 text-white font-bold hover:bg-terra-600">+</button>
+                  </div>
+                </div>
+
+                <!-- Item B: Pastelitos Individuales -->
+                <div class="p-3.5 rounded-2xl bg-cream-50 border border-terra-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <p class="font-bold text-sm text-choco-900">Pastelitos Individuales (Charolita surtida)</p>
+                    <p class="text-xs text-choco-700">$50 MXN c/u en paquete de evento (Oreo, Nutella, Durazno, Bruce, etc.)</p>
+                  </div>
+                  <div class="flex items-center gap-2 self-end sm:self-center">
+                    <button type="button" onclick="adjustQuoteItem('pastelitos', -3)" class="w-8 h-8 rounded-full bg-cream-200 font-bold text-choco-900 hover:bg-terra-200">-</button>
+                    <span id="q-qty-pastelitos" class="w-8 text-center font-extrabold text-sm">0</span>
+                    <button type="button" onclick="adjustQuoteItem('pastelitos', 3)" class="w-8 h-8 rounded-full bg-terra-500 text-white font-bold hover:bg-terra-600">+</button>
+                  </div>
+                </div>
+
+                <!-- Item C: Pastel Principal Personalizado -->
+                <div class="p-3.5 rounded-2xl bg-cream-50 border border-terra-500/25 space-y-2.5">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="font-bold text-sm text-choco-900">Pastel Principal Personalizado</p>
+                      <p class="text-xs text-choco-700">Diseño artesanal y sabor a elegir</p>
+                    </div>
+                    <select id="quote-cake-size" onchange="recalculateQuote()" class="rounded-xl bg-cream-100 border border-terra-500/30 px-3 py-1.5 text-xs font-bold text-choco-900">
+                      <option value="0" selected>Sin pastel principal ($0)</option>
+                      <option value="450">Chico 15-20 pers. ($450)</option>
+                      <option value="680">Mediano 30-35 pers. ($680)</option>
+                      <option value="950">Grande 50 pers. ($950)</option>
+                    </select>
+                  </div>
+                  <div id="cake-flavor-row" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <input type="text" id="quote-cake-flavor" placeholder="Sabor de pan y relleno (ej. Vainilla con cajeta)" class="rounded-xl bg-white border border-terra-500/25 px-3 py-1.5 text-xs text-choco-900">
+                    <input type="text" id="quote-cake-theme" placeholder="Temática o colores deseados" class="rounded-xl bg-white border border-terra-500/25 px-3 py-1.5 text-xs text-choco-900">
+                  </div>
+                </div>
+
+                <!-- Item D: Charolas de Snacks -->
+                <div class="p-3.5 rounded-2xl bg-cream-50 border border-terra-500/25 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <p class="font-bold text-sm text-choco-900">Charolas de Snacks & Bocadillos (15 porciones)</p>
+                    <p class="text-xs text-choco-700">$180 MXN por charola (brownies, mini pays, botanas)</p>
+                  </div>
+                  <div class="flex items-center gap-2 self-end sm:self-center">
+                    <button type="button" onclick="adjustQuoteItem('snacks', -1)" class="w-8 h-8 rounded-full bg-cream-200 font-bold text-choco-900 hover:bg-terra-200">-</button>
+                    <span id="q-qty-snacks" class="w-8 text-center font-extrabold text-sm">0</span>
+                    <button type="button" onclick="adjustQuoteItem('snacks', 1)" class="w-8 h-8 rounded-full bg-terra-500 text-white font-bold hover:bg-terra-600">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="border-terra-500/20">
+
+            <!-- Paso 3: Extras -->
+            <div>
+              <h3 class="font-brand text-xl font-bold text-choco-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-full bg-terra-500 text-white text-sm font-sans flex items-center justify-center">3</span>
+                Detalles y Extras
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+                <label class="flex items-start gap-2.5 p-3 rounded-2xl bg-cream-50 border border-terra-500/25 cursor-pointer hover:bg-terra-100/40">
+                  <input type="checkbox" id="extra-labels" onchange="recalculateQuote()" class="mt-0.5 accent-terra-500 rounded">
+                  <div class="text-xs">
+                    <span class="font-bold text-choco-900 block">Etiquetas temáticas</span>
+                    <span class="text-choco-700">+$80 MXN</span>
+                  </div>
+                </label>
+                <label class="flex items-start gap-2.5 p-3 rounded-2xl bg-cream-50 border border-terra-500/25 cursor-pointer hover:bg-terra-100/40">
+                  <input type="checkbox" id="extra-giftwrap" onchange="recalculateQuote()" class="mt-0.5 accent-terra-500 rounded">
+                  <div class="text-xs">
+                    <span class="font-bold text-choco-900 block">Empaque regalo</span>
+                    <span class="text-choco-700">+$100 MXN</span>
+                  </div>
+                </label>
+                <label class="flex items-start gap-2.5 p-3 rounded-2xl bg-cream-50 border border-terra-500/25 cursor-pointer hover:bg-terra-100/40">
+                  <input type="checkbox" id="extra-delivery" onchange="recalculateQuote()" class="mt-0.5 accent-terra-500 rounded">
+                  <div class="text-xs">
+                    <span class="font-bold text-choco-900 block">Envío a domicilio</span>
+                    <span class="text-choco-700">+$60 MXN</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumen y Envío de Cotización -->
+          <div class="lg:col-span-5 card-paper rounded-3xl p-5 sm:p-6 sticky top-24 border-2 border-terra-500/35">
+            <h3 class="font-brand text-2xl font-bold text-choco-900">Resumen de Cotización</h3>
+            <p class="text-xs text-choco-700 mt-0.5">Estimado calculado en tiempo real</p>
+
+            <div id="quote-summary-list" class="mt-4 space-y-2 text-sm border-y border-terra-500/20 py-3.5">
+              <!-- Desglose dinámico -->
+            </div>
+
+            <div class="mt-4 bg-cream-200/80 rounded-2xl p-4 text-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-choco-700">Total Estimado</span>
+              <div id="quote-total-price" class="font-brand text-3xl sm:text-4xl font-extrabold text-choco-900 mt-0.5">$0 MXN</div>
+              <p id="quote-range-price" class="text-xs text-terra-700 font-semibold mt-1">Selecciona los postres para calcular tu estimado</p>
+            </div>
+
+            <form id="quote-form" onsubmit="submitQuoteForm(event)" class="mt-5 space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Tu Nombre *</label>
+                <input type="text" id="quote-client-name" required placeholder="Ej. Sofía Martínez" class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900 focus:outline-none focus:border-terra-500">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Tu WhatsApp / Teléfono *</label>
+                <input type="tel" id="quote-client-phone" required placeholder="Ej. 871 123 4567" class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900 focus:outline-none focus:border-terra-500">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Notas adicionales</label>
+                <textarea id="quote-client-notes" rows="2" placeholder="Sabores preferidos de pastelitos, dirección o dudas..." class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900 focus:outline-none focus:border-terra-500"></textarea>
+              </div>
+              <button type="submit" class="w-full btn-primary py-3 px-4 rounded-2xl font-bold text-sm shadow-md flex items-center justify-center gap-2">
+                <span>Guardar Cotización y Enviar por WhatsApp</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VISTA 3: PANEL DE ADMINISTRACIÓN (PROTEGIDO CON PIN)      -->
+    <!-- ========================================================= -->
+    <section id="view-admin" class="view-section hidden">
+      <div class="max-w-6xl mx-auto px-4 pt-6 sm:pt-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-choco-900 text-cream-100 rounded-3xl p-5 sm:p-6 shadow-md mb-6">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-sage-500 text-white text-[11px] font-bold uppercase">Modo Administrador</span>
+              <span id="live-sync-badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cream-50/15 text-cream-100 text-[11px] font-semibold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Sincronizado en tiempo real
+              </span>
+            </div>
+            <h1 class="font-brand text-2xl sm:text-3xl font-bold mt-1">Panel de Gestión y Ventas</h1>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="navigateTo('catalogo')" class="px-4 py-2 rounded-full bg-choco-700 hover:bg-choco-800 text-xs font-bold transition">
+              Ver Tienda
+            </button>
+            <button onclick="logoutAdmin()" class="px-4 py-2 rounded-full bg-terra-600 hover:bg-terra-500 text-xs font-bold transition">
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+
+        <!-- Métricas Rápidas -->
+        <div id="admin-metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+          <!-- Renderizado dinámico -->
+        </div>
+
+        <!-- Pestañas del Panel Admin -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-5 border-b border-terra-500/25">
+          <button onclick="switchAdminTab('pedidos')" data-admin-tab="pedidos" class="admin-tab-btn px-4 py-2 rounded-full text-sm font-bold transition whitespace-nowrap">
+            📦 Pedidos Recibidos
+          </button>
+          <button onclick="switchAdminTab('cotizaciones')" data-admin-tab="cotizaciones" class="admin-tab-btn px-4 py-2 rounded-full text-sm font-bold transition whitespace-nowrap">
+            ✨ Cotizaciones Eventos
+          </button>
+          <button onclick="switchAdminTab('productos')" data-admin-tab="productos" class="admin-tab-btn px-4 py-2 rounded-full text-sm font-bold transition whitespace-nowrap">
+            🧁 Catálogo y Precios
+          </button>
+          <button onclick="switchAdminTab('config')" data-admin-tab="config" class="admin-tab-btn px-4 py-2 rounded-full text-sm font-bold transition whitespace-nowrap">
+            ⚙️ Configuración
+          </button>
+        </div>
+
+        <!-- Sub-vista Admin: PEDIDOS -->
+        <div id="admin-panel-pedidos" class="admin-subpanel space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="font-brand text-xl font-bold text-choco-900">Pedidos Levantados</h2>
+            <select id="admin-order-filter" onchange="renderAdminOrders()" class="rounded-full bg-cream-50 border border-terra-500/30 px-3.5 py-1.5 text-xs font-bold text-choco-900">
+              <option value="ALL">Todos los estatus</option>
+              <option value="Pendiente">🟡 Pendientes</option>
+              <option value="En preparación">🔵 En preparación</option>
+              <option value="Listo / Entregado">🟢 Listo / Entregado</option>
+              <option value="Cancelado">🔴 Cancelado</option>
+            </select>
+          </div>
+          <div id="admin-orders-list" class="space-y-3"></div>
+        </div>
+
+        <!-- Sub-vista Admin: COTIZACIONES -->
+        <div id="admin-panel-cotizaciones" class="admin-subpanel hidden space-y-4">
+          <h2 class="font-brand text-xl font-bold text-choco-900">Cotizaciones de Eventos</h2>
+          <div id="admin-quotes-list" class="space-y-3"></div>
+        </div>
+
+        <!-- Sub-vista Admin: GESTIÓN DE CATÁLOGO -->
+        <div id="admin-panel-productos" class="admin-subpanel hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="font-brand text-xl font-bold text-choco-900">Productos del Catálogo</h2>
+              <p class="text-xs text-choco-700">Agrega nuevos postres, edita precios o marca productos como agotados.</p>
+            </div>
+            <button onclick="openProductEditorModal()" class="btn-primary px-5 py-2.5 rounded-full text-sm font-bold shadow-sm self-start sm:self-auto">
+              + Agregar Nuevo Postre
+            </button>
+          </div>
+          <div id="admin-products-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <!-- Sub-vista Admin: CONFIGURACIÓN -->
+        <div id="admin-panel-config" class="admin-subpanel hidden">
+          <div class="max-w-xl card-paper rounded-3xl p-6 space-y-5">
+          <h2 class="font-brand text-2xl font-bold text-choco-900">Ajustes de Happy Rod</h2>
+          <form onsubmit="saveAdminSettings(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-choco-800 mb-1">Número de WhatsApp receptor (10 dígitos o con lada 52)</label>
+              <input type="text" id="cfg-whatsapp" required class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-4 py-2.5 text-sm font-semibold text-choco-900">
+              <p class="text-[11px] text-choco-700 mt-1">Aquí llegarán todos los mensajes automáticos de pedidos y cotizaciones.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Facebook oficial</label>
+                <input type="text" id="cfg-facebook" class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-4 py-2.5 text-sm font-semibold text-choco-900">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-choco-800 mb-1">Instagram oficial</label>
+                <input type="text" id="cfg-instagram" class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-4 py-2.5 text-sm font-semibold text-choco-900">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-choco-800 mb-1">PIN de acceso al Panel Admin (4-6 dígitos)</label>
+              <input type="text" id="cfg-pin" maxlength="6" required class="w-full rounded-2xl bg-cream-50 border border-terra-500/30 px-4 py-2.5 text-sm font-semibold text-choco-900">
+            </div>
+            <div class="flex items-center justify-between p-3.5 rounded-2xl bg-cream-200/70 border border-terra-500/20">
+              <div>
+                <p class="font-bold text-sm text-choco-900">Promoción 3x2 en Pastelitos Individuales</p>
+                <p class="text-xs text-choco-700">Muestra el banner 3x2 ($150) y aplica el descuento en el carrito</p>
+              </div>
+              <input type="checkbox" id="cfg-promo3x2" class="w-5 h-5 accent-terra-500 rounded cursor-pointer">
+            </div>
+            <button type="submit" class="btn-primary w-full py-3 rounded-2xl font-bold text-sm shadow-sm">
+              Guardar Configuración en la Nube
+            </button>
+          </form>
+
+          <hr class="border-terra-500/20">
+
+          <div class="pt-1">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-choco-700 mb-2">Mantenimiento de Base de Datos</h3>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="clearAllOrdersAndQuotes()" class="px-4 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-xs font-bold text-rose-800 transition">
+                Vaciar todos los pedidos y cotizaciones
+              </button>
+              <button type="button" onclick="resetDefaultCatalog()" class="px-4 py-2 rounded-xl bg-cream-200 hover:bg-terra-100 text-xs font-bold text-choco-800 transition">
+                Restaurar menú original
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pie de Página Artesanal -->
+  <footer class="bg-terra-600 text-cream-50 mt-auto pb-20 md:pb-6">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+        <div class="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase">
+          <span>♡</span>
+          <span>Sabores que crean recuerdos</span>
+          <span>♡</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold">
+          <a href="https://www.facebook.com/search/top?q=HAPPY%20ROD" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:underline">
+            <span class="w-5 h-5 rounded-full bg-cream-50 text-terra-600 flex items-center justify-center font-extrabold text-xs">f</span>
+            <span id="footer-fb-text">HAPPY ROD</span>
+          </a>
+          <a href="https://www.instagram.com/happy_rod.postres/" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:underline">
+            <span class="w-5 h-5 rounded-full bg-cream-50 text-terra-600 flex items-center justify-center font-extrabold text-xs">IG</span>
+            <span id="footer-ig-text">@happy_rod.postres</span>
+          </a>
+          <a id="footer-wa-link" href="https://wa.me/528714104191" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:underline">
+            <span>💬</span>
+            <span id="footer-phone-text">871 410 4191</span>
+          </a>
+        </div>
+      </div>
+      <div class="mt-4 pt-3 border-t border-cream-50/20 flex flex-col sm:flex-row items-center justify-between text-[11px] text-cream-200 gap-2">
+        <p>© Happy Rod — Postres, Pasteles & Snacks. Postres que alegran el día ♡</p>
+        <button onclick="openAdminGate()" class="underline hover:text-white">Acceso Repostero (Admin)</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Barra de Navegación Inferior Móvil -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-cream-100/95 backdrop-blur-md border-t border-terra-500/30 px-2 py-1.5 flex items-center justify-around shadow-lg">
+    <button onclick="navigateTo('catalogo')" data-nav="catalogo" class="nav-btn-mobile flex flex-col items-center py-1 px-3 rounded-2xl text-xs font-bold">
+      <span class="text-lg leading-none mb-0.5">🧁</span>
+      <span>Catálogo</span>
+    </button>
+    <button onclick="navigateTo('cotizador')" data-nav="cotizador" class="nav-btn-mobile flex flex-col items-center py-1 px-3 rounded-2xl text-xs font-bold">
+      <span class="text-lg leading-none mb-0.5">✨</span>
+      <span>Cotizar</span>
+    </button>
+    <button onclick="toggleCartDrawer(true)" class="relative flex flex-col items-center py-1 px-3 rounded-2xl text-xs font-bold text-terra-700">
+      <span class="text-lg leading-none mb-0.5">🛍️</span>
+      <span>Mi Pedido</span>
+      <span id="mobile-cart-count" class="absolute top-0.5 right-2 bg-terra-600 text-white text-[10px] font-extrabold px-1.5 rounded-full">0</span>
+    </button>
+  </nav>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: PERSONALIZAR PRODUCTO AL AGREGAR AL CARRITO        -->
+  <!-- ========================================================= -->
+  <div id="product-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-choco-900/50 backdrop-blur-xs p-4">
+    <div class="bg-cream-50 border-2 border-terra-500/35 rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl animate-pop max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span id="pm-category" class="text-[11px] font-extrabold uppercase tracking-wider text-terra-600">Categoría</span>
+          <h3 id="pm-title" class="font-brand text-2xl font-bold text-choco-900">Nombre del Postre</h3>
+        </div>
+        <button onclick="closeProductModal()" class="w-8 h-8 rounded-full bg-cream-200 text-choco-800 font-bold hover:bg-terra-200">✕</button>
+      </div>
+
+      <p id="pm-desc" class="text-xs sm:text-sm text-choco-700 mt-2 leading-relaxed"></p>
+
+      <!-- Selector de Presentación / Paquete (ej. Hojarascas 4, 6, 12, 20 pzas) -->
+      <div id="pm-variants-section" class="mt-4 hidden">
+        <label class="block text-xs font-bold text-choco-900 mb-2">Elige presentación / cantidad de piezas:</label>
+        <div id="pm-variants-list" class="grid grid-cols-2 gap-2"></div>
+      </div>
+
+      <!-- Selector de 1 Sabor (ej. Pastelito individual) -->
+      <div id="pm-flavor-section" class="mt-4 hidden">
+        <label class="block text-xs font-bold text-choco-900 mb-2">Elige el sabor:</label>
+        <div id="pm-flavors-list" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <!-- Selector de 3 Sabores (ej. Promo 3x2) -->
+      <div id="pm-multi-flavor-section" class="mt-4 hidden space-y-2.5">
+        <label class="block text-xs font-bold text-choco-900">Elige tus 3 sabores de la Promo 3x2:</label>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-terra-600 w-16">Pastelito 1:</span>
+            <select id="pm-combo-f1" class="flex-1 rounded-xl bg-white border border-terra-500/30 px-3 py-1.5 text-xs font-bold text-choco-900"></select>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-terra-600 w-16">Pastelito 2:</span>
+            <select id="pm-combo-f2" class="flex-1 rounded-xl bg-white border border-terra-500/30 px-3 py-1.5 text-xs font-bold text-choco-900"></select>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-terra-600 w-16">Pastelito 3:</span>
+            <select id="pm-combo-f3" class="flex-1 rounded-xl bg-white border border-terra-500/30 px-3 py-1.5 text-xs font-bold text-choco-900"></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notas Especiales -->
+      <div class="mt-4">
+        <label class="block text-xs font-bold text-choco-900 mb-1">Notas especiales (opcional)</label>
+        <input type="text" id="pm-notes" placeholder="Ej. Sin nuez, dedicatoria Feliz Cumpleaños..." class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900 focus:outline-none focus:border-terra-500">
+      </div>
+
+      <!-- Cantidad y Total -->
+      <div class="mt-5 pt-4 border-t border-terra-500/20 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5 bg-cream-200 px-3 py-1.5 rounded-full">
+          <button type="button" onclick="changeModalQty(-1)" class="w-7 h-7 rounded-full bg-white font-bold text-choco-900 shadow-xs">-</button>
+          <span id="pm-qty" class="font-extrabold text-sm w-5 text-center">1</span>
+          <button type="button" onclick="changeModalQty(1)" class="w-7 h-7 rounded-full bg-terra-500 text-white font-bold shadow-xs">+</button>
+        </div>
+
+        <button type="button" onclick="confirmAddToCart()" class="flex-1 btn-primary py-3 px-4 rounded-2xl font-bold text-sm shadow-md flex items-center justify-between">
+          <span>Agregar</span>
+          <span id="pm-total-price">$0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- DRAWER LATERAL: CARRITO Y FORMULARIO DE PEDIDO            -->
+  <!-- ========================================================= -->
+  <div id="cart-drawer-overlay" class="fixed inset-0 z-50 hidden bg-choco-900/50 backdrop-blur-xs justify-end">
+    <div class="bg-cream-50 w-full max-w-md h-full flex flex-col shadow-2xl border-l-2 border-terra-500/30">
+      <!-- Header Drawer -->
+      <div class="p-4 sm:p-5 bg-cream-100 border-b border-terra-500/25 flex items-center justify-between">
+        <div>
+          <h2 class="font-brand text-2xl font-bold text-choco-900">Tu Pedido Happy Rod</h2>
+          <p class="text-xs text-choco-700">Revisa tus postres y completa tus datos</p>
+        </div>
+        <button onclick="toggleCartDrawer(false)" class="w-9 h-9 rounded-full bg-cream-200 text-choco-900 font-bold hover:bg-terra-200">✕</button>
+      </div>
+
+      <!-- Cuerpo Scrolleable -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5">
+        <!-- Lista de items -->
+        <div id="cart-items-container" class="space-y-3">
+          <!-- Renderizado dinámico -->
+        </div>
+
+        <!-- Resumen de precios y descuento 3x2 automático -->
+        <div id="cart-totals-box" class="hidden bg-cream-200/80 rounded-2xl p-4 space-y-1.5 border border-terra-500/25">
+          <div class="flex justify-between text-xs font-semibold text-choco-700">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">$0</span>
+          </div>
+          <div id="cart-promo-row" class="hidden flex justify-between text-xs font-bold text-sage-600">
+            <span>🎉 Descuento automático Promo 3x2 Pastelitos</span>
+            <span id="cart-discount">-$0</span>
+          </div>
+          <div class="flex justify-between text-base font-extrabold text-choco-900 pt-1.5 border-t border-terra-500/20">
+            <span>Total a Pagar</span>
+            <span id="cart-final-total">$0 MXN</span>
+          </div>
+        </div>
+
+        <!-- Formulario de Checkout -->
+        <form id="checkout-form" onsubmit="submitOrder(event)" class="hidden space-y-3.5 pt-2">
+          <h3 class="font-brand text-lg font-bold text-choco-900 border-b border-terra-500/20 pb-1">Datos de Entrega</h3>
+          
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Nombre completo *</label>
+            <input type="text" id="order-name" required placeholder="Tu nombre y apellido" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900 focus:outline-none focus:border-terra-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Teléfono / WhatsApp *</label>
+            <input type="tel" id="order-phone" required placeholder="Ej. 871 234 5678" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900 focus:outline-none focus:border-terra-500">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs font-bold text-choco-800 mb-1">Entrega *</label>
+              <select id="order-delivery-type" onchange="toggleAddressField(this.value)" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3 py-2 text-xs font-bold text-choco-900">
+                <option value="Recoger en punto">🛍️ Recoger en punto</option>
+                <option value="Envío a domicilio">🛵 Envío a domicilio</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-choco-800 mb-1">Método de pago *</label>
+              <select id="order-payment" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3 py-2 text-xs font-bold text-choco-900">
+                <option value="Efectivo">💵 Efectivo</option>
+                <option value="Transferencia">🏦 Transferencia</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="order-address-wrap" class="hidden">
+            <label class="block text-xs font-bold text-choco-800 mb-1">Dirección de entrega *</label>
+            <input type="text" id="order-address" placeholder="Calle, número, colonia y referencias" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs font-bold text-choco-800 mb-1">Fecha deseada *</label>
+              <input type="date" id="order-date" required class="w-full rounded-2xl bg-white border border-terra-500/30 px-3 py-2 text-xs font-bold text-choco-900">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-choco-800 mb-1">Hora aproximada *</label>
+              <input type="time" id="order-time" required value="16:00" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3 py-2 text-xs font-bold text-choco-900">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Notas adicionales del pedido</label>
+            <textarea id="order-notes" rows="2" placeholder="Indicaciones especiales..." class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900"></textarea>
+          </div>
+
+          <button type="submit" class="w-full btn-primary py-3.5 px-4 rounded-2xl font-bold text-sm shadow-lg flex items-center justify-center gap-2">
+            <span>Confirmar Pedido y Enviar por WhatsApp</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: CONFIRMACIÓN VISUAL DE PEDIDO / FOLIO GENERADO     -->
+  <!-- ========================================================= -->
+  <div id="confirmation-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-choco-900/60 backdrop-blur-xs p-4">
+    <div class="bg-cream-50 border-2 border-sage-500 rounded-3xl max-w-md w-full p-6 text-center shadow-2xl animate-pop">
+      <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-600 mx-auto flex items-center justify-center text-3xl mb-3">
+        ✓
+      </div>
+      <span id="conf-badge" class="inline-block px-3 py-0.5 rounded-full bg-terra-100 text-terra-700 text-xs font-extrabold uppercase">Folio Generado</span>
+      <h3 id="conf-folio" class="font-brand text-3xl font-bold text-choco-900 mt-1">#HR-1001</h3>
+      <p id="conf-message" class="text-sm text-choco-700 mt-2">
+        Tu pedido quedó guardado en nuestro sistema y abrimos WhatsApp para enviarlo directo a Happy Rod.
+      </p>
+      <div id="conf-details" class="mt-4 bg-cream-200/70 rounded-2xl p-3.5 text-left text-xs text-choco-800 space-y-1 max-h-44 overflow-y-auto"></div>
+      <div class="mt-5 flex flex-col sm:flex-row gap-2">
+        <a id="conf-wa-retry" href="#" target="_blank" rel="noopener" class="flex-1 btn-sage py-2.5 px-4 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5">
+          <span>Abrir WhatsApp de nuevo</span>
+        </a>
+        <button onclick="closeConfirmationModal()" class="flex-1 bg-cream-200 hover:bg-terra-100 text-choco-900 py-2.5 px-4 rounded-2xl font-bold text-xs">
+          Listo, cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: ACCESO PIN ADMINISTRADOR                           -->
+  <!-- ========================================================= -->
+  <div id="admin-pin-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-choco-900/60 backdrop-blur-xs p-4">
+    <div class="bg-cream-50 border-2 border-terra-500/40 rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl animate-pop">
+      <div class="w-12 h-12 rounded-full bg-terra-100 text-terra-600 mx-auto flex items-center justify-center mb-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+      </div>
+      <h3 class="font-brand text-2xl font-bold text-choco-900">Panel de Repostero</h3>
+      <p class="text-xs text-choco-700 mt-1">Ingresa tu PIN de seguridad para continuar.</p>
+      
+      <form onsubmit="verifyAdminPin(event)" class="mt-4 space-y-4">
+        <input type="password" id="admin-pin-input" maxlength="6" inputmode="numeric" autocomplete="off" placeholder="••••" required class="w-full text-center tracking-[0.5em] text-xl font-extrabold rounded-2xl bg-white border-2 border-terra-500/30 py-2.5 text-choco-900 focus:outline-none focus:border-terra-500">
+        <div class="flex gap-2">
+          <button type="button" onclick="closeAdminPinModal()" class="flex-1 py-2.5 rounded-2xl bg-cream-200 font-bold text-xs text-choco-800">Cancelar</button>
+          <button type="submit" class="flex-1 btn-primary py-2.5 rounded-2xl font-bold text-xs">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: EDITOR DE PRODUCTOS (ADMIN)                        -->
+  <!-- ========================================================= -->
+  <div id="product-editor-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-choco-900/60 backdrop-blur-xs p-4">
+    <div class="bg-cream-50 border-2 border-terra-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl animate-pop max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-4">
+        <h3 id="pe-modal-title" class="font-brand text-2xl font-bold text-choco-900">Agregar Postre</h3>
+        <button onclick="closeProductEditorModal()" class="w-8 h-8 rounded-full bg-cream-200 font-bold text-choco-800">✕</button>
+      </div>
+
+      <form onsubmit="saveProductFromEditor(event)" class="space-y-3.5">
+        <input type="hidden" id="pe-id">
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1">Nombre del postre *</label>
+          <input type="text" id="pe-name" required placeholder="Ej. Roles de Canela Glaseados" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-sm text-choco-900">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Categoría *</label>
+            <select id="pe-category" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3 py-2 text-xs font-bold text-choco-900">
+              <option value="Galletas & Hojarascas">Galletas & Hojarascas</option>
+              <option value="Pastelitos Individuales">Pastelitos Individuales</option>
+              <option value="Promociones">Promociones</option>
+              <option value="Pasteles">Pasteles</option>
+              <option value="Snacks & Cajas">Snacks & Cajas</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Precio base ($ MXN) *</label>
+            <input type="number" id="pe-price" required min="1" step="1" placeholder="75" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-sm font-bold text-choco-900">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1">Descripción *</label>
+          <textarea id="pe-desc" rows="2" required placeholder="Describe ingredientes, textura o presentación..." class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Etiqueta destacada (opcional)</label>
+            <input type="text" id="pe-badge" placeholder="Ej. Nuevo, Más vendido, 3x2" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-choco-800 mb-1">Sabores separados por coma (opcional)</label>
+            <input type="text" id="pe-flavors" placeholder="Oreo, Nutella, Cajeta" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1">Presentaciones con precio (opcional, formato: Nombre:Precio)</label>
+          <input type="text" id="pe-variants" placeholder="Ej. 4 piezas:25, 6 piezas:40, 12 piezas:75" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1">Imagen (URL o subir foto desde tu celular/PC)</label>
+          <input type="text" id="pe-image-url" placeholder="https://... o sube un archivo abajo" class="w-full rounded-2xl bg-white border border-terra-500/30 px-3.5 py-2 text-xs text-choco-900 mb-2">
+          <input type="file" accept="image/*" onchange="handleImageUpload(event)" class="text-xs text-choco-700 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-terra-100 file:text-terra-700 hover:file:bg-terra-200">
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <input type="checkbox" id="pe-soldout" class="accent-terra-500 w-4 h-4">
+          <label for="pe-soldout" class="text-xs font-bold text-choco-800">Marcar como "Agotado" temporalmente</label>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closeProductEditorModal()" class="flex-1 py-2.5 rounded-2xl bg-cream-200 font-bold text-xs text-choco-800">Cancelar</button>
+          <button type="submit" class="flex-1 btn-primary py-2.5 rounded-2xl font-bold text-xs shadow-sm">Guardar Producto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- LÓGICA DE LA APLICACIÓN (JAVASCRIPT)                      -->
+  <!-- ========================================================= -->
+  <!-- LÓGICA DE LA APLICACIÓN CON SINCRONIZACIÓN EN TIEMPO REAL -->
+  <!-- ========================================================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      doc,
+      setDoc,
+      updateDoc,
+      deleteDoc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // =========================================================================
+    // 1. CONFIGURACIÓN BASE, ILUSTRACIONES SVG Y DATOS INICIALES HAPPY ROD
+    // =========================================================================
+    const SVG_ART = {
+      hojarascas: `
+        <svg viewBox="0 0 240 160" class="w-full h-full bg-gradient-to-br from-cream-100 to-cream-300">
+          <circle cx="120" cy="80" r="56" fill="#FAF4EC" stroke="#C68B82" stroke-width="2" stroke-dasharray="4 4"/>
+          <ellipse cx="95" cy="92" rx="28" ry="18" fill="#C89B7B" stroke="#4A3525" stroke-width="2"/>
+          <ellipse cx="142" cy="95" rx="28" ry="18" fill="#B98766" stroke="#4A3525" stroke-width="2"/>
+          <ellipse cx="118" cy="70" rx="30" ry="19" fill="#D6AA88" stroke="#4A3525" stroke-width="2"/>
+          <circle cx="108" cy="66" r="1.5" fill="#FFFDF9"/>
+          <circle cx="124" cy="64" r="1.5" fill="#FFFDF9"/>
+          <circle cx="117" cy="73" r="1.5" fill="#FFFDF9"/>
+          <circle cx="130" cy="71" r="1.5" fill="#FFFDF9"/>
+          <circle cx="92" cy="90" r="1.5" fill="#FFFDF9"/>
+          <circle cx="145" cy="92" r="1.5" fill="#FFFDF9"/>
+        </svg>`,
+      promo3x2: `
+        <svg viewBox="0 0 240 160" class="w-full h-full bg-gradient-to-br from-terra-100 via-cream-100 to-terra-200">
+          <rect x="28" y="54" width="52" height="58" rx="10" fill="#E5E7EB" stroke="#4A3525" stroke-width="2"/>
+          <rect x="33" y="59" width="42" height="44" rx="6" fill="#5C4332"/>
+          <path d="M35 72 Q54 64 73 72" stroke="#D4A373" stroke-width="3" fill="none"/>
+          <rect x="94" y="46" width="52" height="66" rx="10" fill="#E5E7EB" stroke="#4A3525" stroke-width="2"/>
+          <rect x="99" y="51" width="42" height="52" rx="6" fill="#FFFDF9"/>
+          <circle cx="112" cy="70" r="5" fill="#F59E0B"/>
+          <circle cx="126" cy="74" r="5" fill="#F59E0B"/>
+          <circle cx="118" cy="84" r="5" fill="#F59E0B"/>
+          <rect x="160" y="54" width="52" height="58" rx="10" fill="#E5E7EB" stroke="#4A3525" stroke-width="2"/>
+          <rect x="165" y="59" width="42" height="44" rx="6" fill="#E9D5BE"/>
+          <circle cx="180" cy="76" r="3" fill="#8C5A3C"/>
+          <circle cx="192" cy="82" r="3" fill="#8C5A3C"/>
+          <text x="120" y="30" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="16" fill="#9A6159">PROMO 3x2</text>
+        </svg>`,
+      pastelito: `
+        <svg viewBox="0 0 240 160" class="w-full h-full bg-gradient-to-br from-cream-100 to-terra-100">
+          <rect x="65" y="42" width="110" height="78" rx="14" fill="#E5E7EB" stroke="#4A3525" stroke-width="2.2"/>
+          <rect x="73" y="50" width="94" height="62" rx="9" fill="#6F4E37"/>
+          <path d="M77 68 Q95 58 115 68 T162 68" stroke="#F8E3E6" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M77 86 Q95 76 115 86 T162 86" stroke="#F8E3E6" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="120" cy="54" r="6" fill="#C68B82" stroke="#4A3525" stroke-width="1.5"/>
+        </svg>`,
+      pastel: `
+        <svg viewBox="0 0 240 160" class="w-full h-full bg-gradient-to-br from-sage-100 via-cream-100 to-terra-100">
+          <ellipse cx="120" cy="122" rx="68" ry="12" fill="#FFFDF9" stroke="#4A3525" stroke-width="2"/>
+          <rect x="74" y="66" width="92" height="52" rx="12" fill="#F8E3E6" stroke="#4A3525" stroke-width="2.2"/>
+          <path d="M74 84 Q90 94 105 84 T136 84 T166 84" fill="none" stroke="#C68B82" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="120" cy="57" r="8" fill="#C68B82" stroke="#4A3525" stroke-width="2"/>
+          <path d="M120 49 Q126 41 132 45" fill="none" stroke="#748E6E" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`,
+      snacks: `
+        <svg viewBox="0 0 240 160" class="w-full h-full bg-gradient-to-br from-cream-200 to-sage-100">
+          <rect x="56" y="42" width="128" height="78" rx="14" fill="#EAD8C7" stroke="#4A3525" stroke-width="2.2"/>
+          <circle cx="94" cy="70" r="15" fill="#C89B7B" stroke="#4A3525" stroke-width="1.8"/>
+          <circle cx="145" cy="70" r="15" fill="#5C4332" stroke="#4A3525" stroke-width="1.8"/>
+          <rect x="78" y="92" width="32" height="18" rx="5" fill="#F4D0D6" stroke="#4A3525" stroke-width="1.8"/>
+          <rect x="128" y="92" width="32" height="18" rx="5" fill="#D4A373" stroke="#4A3525" stroke-width="1.8"/>
+        </svg>`
+    };
+    window.SVG_ART = SVG_ART;
+
+    const DEFAULT_SETTINGS = {
+      whatsappNumber: '8714104191',
+      facebookName: 'HAPPY ROD',
+      instagramHandle: '@happy_rod.postres',
+      adminPin: '1234',
+      promo3x2Active: true
+    };
+
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'prod-hojarascas',
+        name: 'Hojarascas / Galletas Artesanales Azucaradas',
+        category: 'Galletas & Hojarascas',
+        price: 25,
+        badge: 'Receta Tradicional',
+        description: 'Crujientes y suaves galletitas tradicionales espolvoreadas con azúcar y un toque de canela. Elige tu paquete favorito.',
+        variants: [
+          { label: '4 piezas', price: 25 },
+          { label: '6 piezas', price: 40 },
+          { label: '12 piezas', price: 75 },
+          { label: '20 piezas', price: 120 }
+        ],
+        flavors: [],
+        isPromo3x2: false,
+        isSinglePastelito: false,
+        soldOut: false,
+        artKey: 'hojarascas',
+        imageUrl: '',
+        orderIndex: 1
+      },
+      {
+        id: 'prod-promo-3x2',
+        name: 'Promo 3x2 Pastelitos Individuales',
+        category: 'Promociones',
+        price: 150,
+        badge: '★ Lleva 3 y Paga 2',
+        description: '¡Pequeños bocados, grandes momentos! Escoge 3 charolitas de pastelitos individuales combinando tus sabores favoritos.',
+        variants: [],
+        flavors: ['Oreo', 'Nutella', 'Tortupay', 'Durazno', 'Mazapán', 'Bruce', 'Cajeta con nuez'],
+        isPromo3x2: true,
+        isSinglePastelito: false,
+        soldOut: false,
+        artKey: 'promo3x2',
+        imageUrl: '',
+        orderIndex: 2
+      },
+      {
+        id: 'prod-pastelito-ind',
+        name: 'Pastelito Individual (Charolita)',
+        category: 'Pastelitos Individuales',
+        price: 75,
+        badge: 'Participa en 3x2',
+        description: 'Esponjoso pastelito individual en charolita listo para disfrutar. Si agregas 3 al carrito, ¡el 3x2 se aplica solo!',
+        variants: [],
+        flavors: ['Oreo', 'Nutella', 'Tortupay', 'Durazno', 'Mazapán', 'Bruce', 'Cajeta con nuez'],
+        isPromo3x2: false,
+        isSinglePastelito: true,
+        soldOut: false,
+        artKey: 'pastelito',
+        imageUrl: '',
+        orderIndex: 3
+      },
+      {
+        id: 'prod-pastel-personalizado',
+        name: 'Pastel Artesanal Personalizado',
+        category: 'Pasteles',
+        price: 450,
+        badge: 'Sobre Pedido',
+        description: 'Pastel decorado artesanalmente para cumpleaños o celebraciones especiales. Selecciona el tamaño y sabor de relleno.',
+        variants: [
+          { label: 'Chico (15-20 pers.)', price: 450 },
+          { label: 'Mediano (30-35 pers.)', price: 680 },
+          { label: 'Grande (50 pers.)', price: 950 }
+        ],
+        flavors: ['Vainilla con Cajeta y Nuez', 'Chocolate Bruce', 'Tres Leches Durazno', 'Oreo Cookies & Cream'],
+        isPromo3x2: false,
+        isSinglePastelito: false,
+        soldOut: false,
+        artKey: 'pastel',
+        imageUrl: '',
+        orderIndex: 4
+      },
+      {
+        id: 'prod-caja-snacks',
+        name: 'Caja Degustación Happy Snacks',
+        category: 'Snacks & Cajas',
+        price: 180,
+        badge: 'Ideal para Compartir',
+        description: 'Surtido dulce y salado con hojarascas, mini brownies y bocadillos artesanales para reuniones o regalo.',
+        variants: [
+          { label: 'Caja Chica (12 pzas)', price: 180 },
+          { label: 'Charola Familiar (25 pzas)', price: 320 }
+        ],
+        flavors: [],
+        isPromo3x2: false,
+        isSinglePastelito: false,
+        soldOut: false,
+        artKey: 'snacks',
+        imageUrl: '',
+        orderIndex: 5
+      }
+    ];
+
+    // Inicialización segura de Firebase (funciona tanto en entorno nube como en archivo local)
+    let app = null;
+    let auth = null;
+    let db = null;
+    let currentUser = null;
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'happy-rod-store';
+
+    try {
+      if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+        const firebaseConfig = JSON.parse(__firebase_config);
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+      }
+    } catch (err) {
+      console.warn('Iniciando en modo almacenamiento local:', err);
+    }
+
+    // =========================================================================
+    // 2. ESTADO EN MEMORIA Y PERSISTENCIA HÍBRIDA (FIRESTORE + STORAGE LOCAL)
+    // =========================================================================
+    const STORAGE_KEYS = {
+      products: 'happyrod_products_v2',
+      orders: 'happyrod_orders_v2',
+      quotes: 'happyrod_quotes_v2',
+      settings: 'happyrod_settings_v2'
+    };
+
+    function readLocal(key, fallback) {
+      try {
+        const raw = window.localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function writeLocal(key, value) {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      } catch {
+        // Ignorar si está restringido
+      }
+    }
+
+    let state = {
+      products: readLocal(STORAGE_KEYS.products, [...DEFAULT_PRODUCTS]),
+      orders: readLocal(STORAGE_KEYS.orders, []),
+      quotes: readLocal(STORAGE_KEYS.quotes, []),
+      settings: { ...DEFAULT_SETTINGS, ...readLocal(STORAGE_KEYS.settings, {}) },
+      cart: [],
+      selectedCategory: 'Todos',
+      isAdminAuthenticated: false,
+      activeAdminTab: 'pedidos',
+      modalProduct: null,
+      modalSelectedVariantIdx: 0,
+      modalSelectedFlavor: '',
+      modalQty: 1,
+      quoteQuantities: {
+        galletas: 0,
+        pastelitos: 0,
+        snacks: 0
+      },
+      productsInitialized: false,
+      cloudConnected: false
+    };
+
+    // Sincronización entre pestañas si se abre localmente
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEYS.orders) {
+        state.orders = readLocal(STORAGE_KEYS.orders, []);
+        if (state.isAdminAuthenticated) renderAdminDashboard();
+      }
+      if (e.key === STORAGE_KEYS.quotes) {
+        state.quotes = readLocal(STORAGE_KEYS.quotes, []);
+        if (state.isAdminAuthenticated) renderAdminDashboard();
+      }
+      if (e.key === STORAGE_KEYS.products) {
+        state.products = readLocal(STORAGE_KEYS.products, [...DEFAULT_PRODUCTS]);
+        renderCategoryFilters();
+        renderProductsGrid();
+        if (state.isAdminAuthenticated) renderAdminDashboard();
+      }
+      if (e.key === STORAGE_KEYS.settings) {
+        state.settings = { ...DEFAULT_SETTINGS, ...readLocal(STORAGE_KEYS.settings, {}) };
+        applySettingsToUI();
+      }
+    });
+
+    // =========================================================================
+    // 3. SINCRONIZACIÓN EN TIEMPO REAL CON FIRESTORE (onSnapshot)
+    // =========================================================================
+    async function initRealtimeDatabase() {
+      if (!db || !auth) return;
+
+      try {
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+        currentUser = auth.currentUser;
+      } catch (err) {
+        console.warn('Usando modo local sincronizado:', err);
+        return;
+      }
+
+      if (!currentUser) return;
+      state.cloudConnected = true;
+
+      // 1) Suscripción en tiempo real a CONFIGURACIÓN
+      const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'configuracion', 'general');
+      onSnapshot(configDocRef, async (snap) => {
+        if (snap.exists()) {
+          state.settings = { ...DEFAULT_SETTINGS, ...snap.data() };
+          writeLocal(STORAGE_KEYS.settings, state.settings);
+          applySettingsToUI();
+          renderProductsGrid();
+          updateCartUI();
+          if (state.isAdminAuthenticated && state.activeAdminTab === 'config') {
+            loadAdminSettingsForm();
+          }
+        } else {
+          await setDoc(configDocRef, state.settings);
+        }
+      }, (err) => console.error('Error escuchando configuración:', err));
+
+      // 2) Suscripción en tiempo real a PRODUCTOS
+      const productsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'productos');
+      onSnapshot(productsColRef, async (snapshot) => {
+        if (snapshot.empty && !state.productsInitialized) {
+          state.productsInitialized = true;
+          for (const p of state.products) {
+            await setDoc(doc(productsColRef, p.id), p);
+          }
+          return;
+        }
+        state.productsInitialized = true;
+        const loaded = [];
+        snapshot.forEach(d => loaded.push({ id: d.id, ...d.data() }));
+        loaded.sort((a, b) => (a.orderIndex || 99) - (b.orderIndex || 99));
+        state.products = loaded;
+        writeLocal(STORAGE_KEYS.products, state.products);
+
+        renderCategoryFilters();
+        renderProductsGrid();
+        if (state.isAdminAuthenticated) {
+          renderAdminDashboard();
+        }
+      }, (err) => console.error('Error escuchando productos:', err));
+
+      // 3) Suscripción en tiempo real a PEDIDOS
+      const ordersColRef = collection(db, 'artifacts', appId, 'public', 'data', 'pedidos');
+      onSnapshot(ordersColRef, (snapshot) => {
+        const loadedOrders = [];
+        snapshot.forEach(d => loadedOrders.push({ id: d.id, ...d.data() }));
+        loadedOrders.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+        const prevCount = state.orders.length;
+        state.orders = loadedOrders;
+        writeLocal(STORAGE_KEYS.orders, state.orders);
+
+        if (state.isAdminAuthenticated && loadedOrders.length > prevCount && prevCount > 0) {
+          showToast(`¡Nuevo pedido recibido! (#${loadedOrders[0].folio})`);
+        }
+
+        if (state.isAdminAuthenticated) {
+          renderAdminDashboard();
+        }
+      }, (err) => console.error('Error escuchando pedidos:', err));
+
+      // 4) Suscripción en tiempo real a COTIZACIONES
+      const quotesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'cotizaciones');
+      onSnapshot(quotesColRef, (snapshot) => {
+        const loadedQuotes = [];
+        snapshot.forEach(d => loadedQuotes.push({ id: d.id, ...d.data() }));
+        loadedQuotes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+        const prevCount = state.quotes.length;
+        state.quotes = loadedQuotes;
+        writeLocal(STORAGE_KEYS.quotes, state.quotes);
+
+        if (state.isAdminAuthenticated && loadedQuotes.length > prevCount && prevCount > 0) {
+          showToast(`¡Nueva cotización recibida! (#${loadedQuotes[0].folio})`);
+        }
+
+        if (state.isAdminAuthenticated) {
+          renderAdminDashboard();
+        }
+      }, (err) => console.error('Error escuchando cotizaciones:', err));
+    }
+
+    // =========================================================================
+    // 4. UTILIDADES UI Y FORMATO TELÉFONO MÉXICO (+52)
+    // =========================================================================
+    function formatWhatsAppLinkNumber(rawPhone) {
+      const digits = (rawPhone || '').replace(/\D/g, '');
+      if (digits.length === 10) return '52' + digits;
+      return digits || '528714104191';
+    }
+
+    function formatDisplayPhone(rawPhone) {
+      const digits = (rawPhone || '').replace(/\D/g, '');
+      const local10 = digits.length === 12 && digits.startsWith('52') ? digits.slice(2) : digits;
+      if (local10.length === 10) {
+        return `${local10.slice(0, 3)} ${local10.slice(3, 6)} ${local10.slice(6)}`;
+      }
+      return rawPhone || '871 410 4191';
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bgClass = type === 'error'
+        ? 'bg-terra-700 text-white border-terra-400'
+        : 'bg-choco-900 text-cream-50 border-terra-500';
+      toast.className = `pointer-events-auto px-4 py-3 rounded-2xl border shadow-xl text-xs font-bold flex items-center gap-2.5 animate-pop ${bgClass}`;
+      toast.innerHTML = `<span class="text-base">${type === 'error' ? '⚠️' : '🧁'}</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-6px)';
+        toast.style.transition = 'all 0.25s ease';
+        setTimeout(() => toast.remove(), 260);
+      }, 3000);
+    }
+
+    function formatCurrency(num) {
+      return '$' + Number(num).toLocaleString('es-MX');
+    }
+
+    function applySettingsToUI() {
+      const waClean = formatWhatsAppLinkNumber(state.settings.whatsappNumber);
+      document.getElementById('footer-phone-text').textContent = formatDisplayPhone(state.settings.whatsappNumber);
+      document.getElementById('footer-wa-link').href = `https://wa.me/${waClean}`;
+      document.getElementById('footer-fb-text').textContent = state.settings.facebookName || 'HAPPY ROD';
+      document.getElementById('footer-ig-text').textContent = state.settings.instagramHandle || '@happy_rod.postres';
+
+      const promoCard = document.getElementById('hero-promo-card');
+      if (promoCard) {
+        promoCard.style.display = state.settings.promo3x2Active ? 'block' : 'none';
+      }
+    }
+
+    // =========================================================================
+    // 5. NAVEGACIÓN ENTRE SECCIONES
+    // =========================================================================
+    function navigateTo(viewName) {
+      if (viewName === 'admin' && !state.isAdminAuthenticated) {
+        openAdminGate();
+        return;
+      }
+
+      document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.dataset.nav === viewName) {
+          btn.classList.add('bg-terra-500', 'text-white', 'shadow-xs');
+          btn.classList.remove('text-choco-700');
+        } else {
+          btn.classList.remove('bg-terra-500', 'text-white', 'shadow-xs');
+        }
+      });
+
+      document.querySelectorAll('.nav-btn-mobile').forEach(btn => {
+        if (btn.dataset.nav === viewName) {
+          btn.classList.add('bg-terra-100', 'text-terra-700');
+        } else {
+          btn.classList.remove('bg-terra-100', 'text-terra-700');
+        }
+      });
+
+      if (viewName === 'admin') renderAdminDashboard();
+      if (viewName === 'cotizador') recalculateQuote();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // =========================================================================
+    // 6. CATÁLOGO DE PRODUCTOS Y FILTROS
+    // =========================================================================
+    function renderCategoryFilters() {
+      const container = document.getElementById('category-filters');
+      const categories = ['Todos', ...new Set(state.products.map(p => p.category))];
+      container.innerHTML = categories.map(cat => {
+        const active = state.selectedCategory === cat;
+        return `
+          <button onclick="setCategoryFilter('${cat}')"
+            class="px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all border ${
+              active
+                ? 'bg-terra-500 text-white border-terra-500 shadow-xs'
+                : 'bg-cream-50 text-choco-800 border-terra-500/25 hover:bg-terra-100/60'
+            }">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setCategoryFilter(cat) {
+      state.selectedCategory = cat;
+      renderCategoryFilters();
+      renderProductsGrid();
+    }
+
+    function getProductVisualHTML(prod) {
+      if (prod.imageUrl && prod.imageUrl.trim() !== '') {
+        return `<img src="${prod.imageUrl}" alt="${prod.name}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML = window.SVG_ART['${prod.artKey || 'pastel'}'];">`;
+      }
+      return SVG_ART[prod.artKey] || SVG_ART.pastel;
+    }
+
+    function renderProductsGrid() {
+      const grid = document.getElementById('products-grid');
+      const filtered = state.products.filter(p => {
+        if (!state.settings.promo3x2Active && p.isPromo3x2) return false;
+        if (state.selectedCategory === 'Todos') return true;
+        return p.category === state.selectedCategory;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-choco-700 font-semibold">No hay postres en esta categoría por el momento.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(prod => {
+        const hasVariants = prod.variants && prod.variants.length > 0;
+        const priceLabel = hasVariants
+          ? `Desde ${formatCurrency(Math.min(...prod.variants.map(v => v.price)))}`
+          : formatCurrency(prod.price);
+
+        const variantsBadges = hasVariants
+          ? `<div class="flex flex-wrap gap-1 mt-2.5">
+              ${prod.variants.map(v => `<span class="text-[11px] font-bold bg-cream-200 text-choco-800 px-2 py-0.5 rounded-lg">${v.label}: ${formatCurrency(v.price)}</span>`).join('')}
+            </div>`
+          : '';
+
+        const flavorsPreview = (prod.flavors && prod.flavors.length > 0)
+          ? `<p class="text-[11px] text-terra-700 font-semibold mt-2">Sabores: ${prod.flavors.slice(0, 4).join(', ')}${prod.flavors.length > 4 ? '...' : ''}</p>`
+          : '';
+
+        return `
+          <article class="card-paper rounded-3xl overflow-hidden flex flex-col justify-between transition-transform hover:-translate-y-1">
+            <div>
+              <div class="relative h-44 bg-cream-200 overflow-hidden">
+                ${getProductVisualHTML(prod)}
+                ${prod.badge ? `<span class="absolute top-3 left-3 bg-cream-50/95 text-terra-700 border border-terra-500/30 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-xs">${prod.badge}</span>` : ''}
+                ${prod.soldOut ? `<div class="absolute inset-0 bg-choco-900/60 flex items-center justify-center"><span class="bg-terra-600 text-white font-extrabold text-xs uppercase px-4 py-1.5 rounded-full tracking-wider">Agotado</span></div>` : ''}
+              </div>
+              <div class="p-5">
+                <div class="flex items-start justify-between gap-2">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-sage-600">${prod.category}</span>
+                  <span class="font-brand text-xl font-extrabold text-choco-900 shrink-0">${priceLabel}</span>
+                </div>
+                <h3 class="font-brand text-xl font-bold text-choco-900 mt-1 leading-snug">${prod.name}</h3>
+                <p class="text-xs text-choco-700 mt-1.5 leading-relaxed">${prod.description}</p>
+                ${variantsBadges}
+                ${flavorsPreview}
+              </div>
+            </div>
+
+            <div class="px-5 pb-5 pt-1">
+              <button onclick="openProductModal('${prod.id}')" ${prod.soldOut ? 'disabled' : ''}
+                class="w-full py-2.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 ${
+                  prod.soldOut
+                    ? 'bg-cream-300 text-choco-700 cursor-not-allowed'
+                    : 'btn-primary shadow-xs'
+                }">
+                <span>${prod.soldOut ? 'No disponible' : (hasVariants || prod.flavors?.length ? 'Elegir opciones y agregar' : 'Agregar al pedido')}</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // 7. MODAL DE PERSONALIZACIÓN Y AGREGADO AL CARRITO
+    // =========================================================================
+    function openProductModal(productId) {
+      const prod = state.products.find(p => p.id === productId);
+      if (!prod || prod.soldOut) return;
+
+      state.modalProduct = prod;
+      state.modalSelectedVariantIdx = 0;
+      state.modalSelectedFlavor = (prod.flavors && prod.flavors.length > 0) ? prod.flavors[0] : '';
+      state.modalQty = 1;
+
+      document.getElementById('pm-category').textContent = prod.category;
+      document.getElementById('pm-title').textContent = prod.name;
+      document.getElementById('pm-desc').textContent = prod.description;
+      document.getElementById('pm-notes').value = '';
+      document.getElementById('pm-qty').textContent = '1';
+
+      const varSec = document.getElementById('pm-variants-section');
+      const varList = document.getElementById('pm-variants-list');
+      if (prod.variants && prod.variants.length > 0) {
+        varSec.classList.remove('hidden');
+        renderModalVariants();
+      } else {
+        varSec.classList.add('hidden');
+        varList.innerHTML = '';
+      }
+
+      const flavSec = document.getElementById('pm-flavor-section');
+      const multiSec = document.getElementById('pm-multi-flavor-section');
+
+      if (prod.isPromo3x2 && prod.flavors && prod.flavors.length > 0) {
+        flavSec.classList.add('hidden');
+        multiSec.classList.remove('hidden');
+        const optionsHTML = prod.flavors.map(f => `<option value="${f}">${f}</option>`).join('');
+        ['pm-combo-f1', 'pm-combo-f2', 'pm-combo-f3'].forEach((id, idx) => {
+          const sel = document.getElementById(id);
+          sel.innerHTML = optionsHTML;
+          if (prod.flavors[idx]) sel.value = prod.flavors[idx];
+        });
+      } else if (prod.flavors && prod.flavors.length > 0) {
+        multiSec.classList.add('hidden');
+        flavSec.classList.remove('hidden');
+        renderModalFlavors();
+      } else {
+        flavSec.classList.add('hidden');
+        multiSec.classList.add('hidden');
+      }
+
+      updateModalPrice();
+      const modal = document.getElementById('product-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function renderModalVariants() {
+      const prod = state.modalProduct;
+      const varList = document.getElementById('pm-variants-list');
+      varList.innerHTML = prod.variants.map((v, idx) => {
+        const active = idx === state.modalSelectedVariantIdx;
+        return `
+          <button type="button" onclick="selectModalVariant(${idx})"
+            class="p-2.5 rounded-2xl border-2 text-left transition-all ${
+              active
+                ? 'border-terra-500 bg-terra-100/70 text-choco-900'
+                : 'border-terra-500/20 bg-white text-choco-700 hover:border-terra-400'
+            }">
+            <span class="block text-xs font-extrabold">${v.label}</span>
+            <span class="block text-sm font-brand font-bold text-terra-700">${formatCurrency(v.price)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectModalVariant(idx) {
+      state.modalSelectedVariantIdx = idx;
+      renderModalVariants();
+      updateModalPrice();
+    }
+
+    function renderModalFlavors() {
+      const prod = state.modalProduct;
+      const flavList = document.getElementById('pm-flavors-list');
+      flavList.innerHTML = prod.flavors.map(f => {
+        const active = f === state.modalSelectedFlavor;
+        return `
+          <button type="button" onclick="selectModalFlavor('${f}')"
+            class="px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
+              active
+                ? 'bg-terra-500 text-white border-terra-500'
+                : 'bg-white text-choco-800 border-terra-500/25 hover:bg-terra-100'
+            }">
+            ${f}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectModalFlavor(flavor) {
+      state.modalSelectedFlavor = flavor;
+      renderModalFlavors();
+    }
+
+    function changeModalQty(delta) {
+      state.modalQty = Math.max(1, state.modalQty + delta);
+      document.getElementById('pm-qty').textContent = state.modalQty;
+      updateModalPrice();
+    }
+
+    function getCurrentModalUnitPrice() {
+      const prod = state.modalProduct;
+      if (!prod) return 0;
+      if (prod.variants && prod.variants.length > 0) {
+        return prod.variants[state.modalSelectedVariantIdx].price;
+      }
+      return prod.price;
+    }
+
+    function updateModalPrice() {
+      const total = getCurrentModalUnitPrice() * state.modalQty;
+      document.getElementById('pm-total-price').textContent = formatCurrency(total);
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById('product-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function confirmAddToCart() {
+      const prod = state.modalProduct;
+      if (!prod) return;
+
+      const unitPrice = getCurrentModalUnitPrice();
+      const notes = document.getElementById('pm-notes').value.trim();
+      let detailParts = [];
+
+      if (prod.variants && prod.variants.length > 0) {
+        detailParts.push(prod.variants[state.modalSelectedVariantIdx].label);
+      }
+
+      if (prod.isPromo3x2) {
+        const f1 = document.getElementById('pm-combo-f1').value;
+        const f2 = document.getElementById('pm-combo-f2').value;
+        const f3 = document.getElementById('pm-combo-f3').value;
+        detailParts.push(`Sabores: ${f1}, ${f2}, ${f3}`);
+      } else if (prod.flavors && prod.flavors.length > 0 && state.modalSelectedFlavor) {
+        detailParts.push(`Sabor: ${state.modalSelectedFlavor}`);
+      }
+
+      if (notes) {
+        detailParts.push(`Nota: "${notes}"`);
+      }
+
+      const detail = detailParts.join(' • ');
+      const existingIdx = state.cart.findIndex(item => item.productId === prod.id && item.detail === detail);
+
+      if (existingIdx > -1) {
+        state.cart[existingIdx].qty += state.modalQty;
+      } else {
+        state.cart.push({
+          cartItemId: 'ci-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+          productId: prod.id,
+          name: prod.name,
+          detail,
+          unitPrice,
+          qty: state.modalQty,
+          isSinglePastelito: !!prod.isSinglePastelito
+        });
+      }
+
+      updateCartUI();
+      closeProductModal();
+      showToast(`Agregado: ${prod.name}`);
+    }
+
+    // =========================================================================
+    // 8. CARRITO INTELIGENTE (CON PROMO 3x2 AUTOMÁTICA) Y CHECKOUT EN VIVO
+    // =========================================================================
+    function toggleCartDrawer(open) {
+      const overlay = document.getElementById('cart-drawer-overlay');
+      if (open) {
+        updateCartUI();
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+      } else {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+      }
+    }
+
+    function updateCartItemQty(cartItemId, delta) {
+      const idx = state.cart.findIndex(i => i.cartItemId === cartItemId);
+      if (idx === -1) return;
+      state.cart[idx].qty += delta;
+      if (state.cart[idx].qty <= 0) {
+        state.cart.splice(idx, 1);
+      }
+      updateCartUI();
+    }
+
+    function calculateCartTotals() {
+      let subtotal = 0;
+      let singlePastelitosCount = 0;
+
+      state.cart.forEach(item => {
+        subtotal += item.unitPrice * item.qty;
+        if (item.isSinglePastelito) {
+          singlePastelitosCount += item.qty;
+        }
+      });
+
+      let discount = 0;
+      if (state.settings.promo3x2Active && singlePastelitosCount >= 3) {
+        const trios = Math.floor(singlePastelitosCount / 3);
+        discount = trios * 75;
+      }
+
+      return {
+        subtotal,
+        discount,
+        total: Math.max(0, subtotal - discount)
+      };
+    }
+
+    function updateCartUI() {
+      const totalItems = state.cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('header-cart-count').textContent = totalItems;
+      document.getElementById('mobile-cart-count').textContent = totalItems;
+
+      const container = document.getElementById('cart-items-container');
+      const totalsBox = document.getElementById('cart-totals-box');
+      const checkoutForm = document.getElementById('checkout-form');
+
+      if (state.cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 px-4">
+            <div class="text-4xl mb-2">🧁</div>
+            <p class="font-brand text-xl font-bold text-choco-900">Tu carrito está vacío</p>
+            <p class="text-xs text-choco-700 mt-1">Explora nuestras hojarascas, pastelitos 3x2 y pasteles artesanales.</p>
+            <button onclick="toggleCartDrawer(false); navigateTo('catalogo');" class="mt-4 btn-primary px-5 py-2.5 rounded-full text-xs font-bold">
+              Ir al Catálogo
+            </button>
+          </div>
+        `;
+        totalsBox.classList.add('hidden');
+        checkoutForm.classList.add('hidden');
+        return;
+      }
+
+      totalsBox.classList.remove('hidden');
+      checkoutForm.classList.remove('hidden');
+
+      container.innerHTML = state.cart.map(item => `
+        <div class="bg-white rounded-2xl p-3.5 border border-terra-500/25 flex items-start justify-between gap-3">
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-xs sm:text-sm text-choco-900 leading-snug">${item.name}</p>
+            ${item.detail ? `<p class="text-[11px] text-choco-700 mt-0.5">${item.detail}</p>` : ''}
+            <p class="text-xs font-extrabold text-terra-600 mt-1">${formatCurrency(item.unitPrice * item.qty)}</p>
+          </div>
+          <div class="flex items-center gap-1.5 bg-cream-100 px-2 py-1 rounded-full shrink-0">
+            <button type="button" onclick="updateCartItemQty('${item.cartItemId}', -1)" class="w-6 h-6 rounded-full bg-white text-xs font-bold text-choco-900">-</button>
+            <span class="text-xs font-extrabold w-4 text-center">${item.qty}</span>
+            <button type="button" onclick="updateCartItemQty('${item.cartItemId}', 1)" class="w-6 h-6 rounded-full bg-terra-500 text-white text-xs font-bold">+</button>
+          </div>
+        </div>
+      `).join('');
+
+      const { subtotal, discount, total } = calculateCartTotals();
+      document.getElementById('cart-subtotal').textContent = formatCurrency(subtotal);
+      document.getElementById('cart-final-total').textContent = `${formatCurrency(total)} MXN`;
+
+      const promoRow = document.getElementById('cart-promo-row');
+      if (discount > 0) {
+        promoRow.classList.remove('hidden');
+        document.getElementById('cart-discount').textContent = `-${formatCurrency(discount)}`;
+      } else {
+        promoRow.classList.add('hidden');
+      }
+    }
+
+    function toggleAddressField(val) {
+      const wrap = document.getElementById('order-address-wrap');
+      const input = document.getElementById('order-address');
+      if (val === 'Envío a domicilio') {
+        wrap.classList.remove('hidden');
+        input.required = true;
+      } else {
+        wrap.classList.add('hidden');
+        input.required = false;
+      }
+    }
+
+    async function submitOrder(e) {
+      e.preventDefault();
+      if (state.cart.length === 0) return;
+
+      const { discount, total } = calculateCartTotals();
+      const folioNum = 1001 + state.orders.length;
+      const folio = `HR-${folioNum}`;
+      const docId = `${folio}-${Date.now().toString().slice(-4)}`;
+
+      const newOrder = {
+        id: docId,
+        folio,
+        timestamp: Date.now(),
+        createdAt: new Date().toLocaleString('es-MX', { dateStyle: 'short', timeStyle: 'short' }),
+        customerName: document.getElementById('order-name').value.trim(),
+        customerPhone: document.getElementById('order-phone').value.trim(),
+        deliveryType: document.getElementById('order-delivery-type').value,
+        address: document.getElementById('order-address').value.trim(),
+        deliveryDate: document.getElementById('order-date').value,
+        deliveryTime: document.getElementById('order-time').value,
+        paymentMethod: document.getElementById('order-payment').value,
+        notes: document.getElementById('order-notes').value.trim(),
+        items: state.cart.map(i => ({
+          name: i.name,
+          detail: i.detail,
+          qty: i.qty,
+          unitPrice: i.unitPrice,
+          subtotal: i.unitPrice * i.qty
+        })),
+        discount,
+        total,
+        status: 'Pendiente'
+      };
+
+      // Actualización inmediata en memoria y respaldo local + nube en tiempo real
+      state.orders.unshift(newOrder);
+      writeLocal(STORAGE_KEYS.orders, state.orders);
+      if (state.isAdminAuthenticated) {
+        renderAdminDashboard();
+      }
+
+      if (db && currentUser) {
+        try {
+          await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pedidos', docId), newOrder);
+        } catch (err) {
+          console.error('Error guardando pedido en nube:', err);
+        }
+      }
+
+      const itemsText = newOrder.items.map(i =>
+        `• ${i.qty}x ${i.name}${i.detail ? ` (${i.detail})` : ''} - ${formatCurrency(i.subtotal)}`
+      ).join('\n');
+
+      const waMessage =
+`🧁 *NUEVO PEDIDO HAPPY ROD* 🦕
+*Folio:* #${newOrder.folio}
+*Cliente:* ${newOrder.customerName}
+*Teléfono:* ${newOrder.customerPhone}
+
+*Detalle del Pedido:*
+${itemsText}${newOrder.discount > 0 ? `\n🎉 *Descuento Promo 3x2:* -${formatCurrency(newOrder.discount)}` : ''}
+
+*Total a Pagar:* ${formatCurrency(newOrder.total)} MXN
+*Entrega:* ${newOrder.deliveryType}${newOrder.address ? ` (${newOrder.address})` : ''}
+*Fecha y Hora:* ${newOrder.deliveryDate} a las ${newOrder.deliveryTime}
+*Pago:* ${newOrder.paymentMethod}${newOrder.notes ? `\n*Notas:* ${newOrder.notes}` : ''}
+
+_¡Gracias por endulzar tu día con Happy Rod!_ ♡`;
+
+      const cleanPhone = formatWhatsAppLinkNumber(state.settings.whatsappNumber);
+      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMessage)}`;
+
+      state.cart = [];
+      document.getElementById('checkout-form').reset();
+      toggleAddressField('Recoger en punto');
+      updateCartUI();
+      toggleCartDrawer(false);
+
+      showConfirmationModal(
+        'Pedido Guardado',
+        `#${newOrder.folio}`,
+        'Tu pedido quedó registrado correctamente y abrimos WhatsApp para enviarlo directo a Happy Rod.',
+        newOrder.items.map(i => `<div>• <strong>${i.qty}x ${i.name}</strong> ${i.detail ? `<span class="text-choco-700">(${i.detail})</span>` : ''} — ${formatCurrency(i.subtotal)}</div>`).join('') +
+        `<div class="pt-1.5 mt-1.5 border-t border-terra-500/20 font-extrabold">Total: ${formatCurrency(newOrder.total)} MXN • ${newOrder.deliveryType}</div>`,
+        waUrl
+      );
+
+      window.open(waUrl, '_blank', 'noopener');
+    }
+
+    function showConfirmationModal(badge, folio, message, detailsHTML, waUrl) {
+      document.getElementById('conf-badge').textContent = badge;
+      document.getElementById('conf-folio').textContent = folio;
+      document.getElementById('conf-message').textContent = message;
+      document.getElementById('conf-details').innerHTML = detailsHTML;
+      document.getElementById('conf-wa-retry').href = waUrl;
+
+      const modal = document.getElementById('confirmation-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeConfirmationModal() {
+      const modal = document.getElementById('confirmation-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // =========================================================================
+    // 9. COTIZADOR INTERACTIVO DE EVENTOS
+    // =========================================================================
+    function updateGuestsSlider(val) {
+      document.getElementById('quote-guests-display').textContent = `${val} personas`;
+      recalculateQuote();
+    }
+
+    function setQuickGuests(num) {
+      const slider = document.getElementById('quote-guests');
+      slider.value = num;
+      updateGuestsSlider(num);
+    }
+
+    function adjustQuoteItem(key, delta) {
+      state.quoteQuantities[key] = Math.max(0, state.quoteQuantities[key] + delta);
+      document.getElementById(`q-qty-${key}`).textContent = state.quoteQuantities[key];
+      recalculateQuote();
+    }
+
+    function recalculateQuote() {
+      const galletasQty = state.quoteQuantities.galletas;
+      const pastelitosQty = state.quoteQuantities.pastelitos;
+      const snacksQty = state.quoteQuantities.snacks;
+      const cakeSelect = document.getElementById('quote-cake-size');
+      const cakePrice = Number(cakeSelect.value);
+      const cakeLabel = cakeSelect.options[cakeSelect.selectedIndex].text.split(' ($')[0];
+
+      const extraLabels = document.getElementById('extra-labels').checked;
+      const extraGiftwrap = document.getElementById('extra-giftwrap').checked;
+      const extraDelivery = document.getElementById('extra-delivery').checked;
+
+      const cakeRow = document.getElementById('cake-flavor-row');
+      if (cakePrice > 0) cakeRow.classList.remove('hidden');
+      else cakeRow.classList.add('hidden');
+
+      const lines = [];
+      let total = 0;
+
+      if (galletasQty > 0) {
+        const sub = galletasQty * 120;
+        total += sub;
+        lines.push({ label: `${galletasQty}x Charola Hojarascas (20 pzas c/u)`, price: sub });
+      }
+      if (pastelitosQty > 0) {
+        const sub = pastelitosQty * 50;
+        total += sub;
+        lines.push({ label: `${pastelitosQty}x Pastelitos Individuales (paquete evento)`, price: sub });
+      }
+      if (cakePrice > 0) {
+        total += cakePrice;
+        lines.push({ label: `Pastel Principal (${cakeLabel})`, price: cakePrice });
+      }
+      if (snacksQty > 0) {
+        const sub = snacksQty * 180;
+        total += sub;
+        lines.push({ label: `${snacksQty}x Charola Snacks & Bocadillos`, price: sub });
+      }
+      if (extraLabels) {
+        total += 80;
+        lines.push({ label: 'Etiquetas personalizadas temáticas', price: 80 });
+      }
+      if (extraGiftwrap) {
+        total += 100;
+        lines.push({ label: 'Empaque individual para regalo', price: 100 });
+      }
+      if (extraDelivery) {
+        total += 60;
+        lines.push({ label: 'Servicio de entrega a domicilio', price: 60 });
+      }
+
+      const summaryEl = document.getElementById('quote-summary-list');
+      if (lines.length === 0) {
+        summaryEl.innerHTML = `<p class="text-xs text-choco-700 italic">Aún no has seleccionado postres. Agrega cantidades arriba para ver tu estimado.</p>`;
+      } else {
+        summaryEl.innerHTML = lines.map(l => `
+          <div class="flex justify-between gap-2 text-xs">
+            <span class="text-choco-800 font-semibold">${l.label}</span>
+            <span class="font-bold text-choco-900 shrink-0">${formatCurrency(l.price)}</span>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('quote-total-price').textContent = `${formatCurrency(total)} MXN`;
+      if (total === 0) {
+        document.getElementById('quote-range-price').textContent = 'Selecciona los postres para calcular tu estimado';
+      } else {
+        const low = Math.max(0, Math.round((total * 0.95) / 10) * 10);
+        const high = Math.round((total * 1.08) / 10) * 10;
+        document.getElementById('quote-range-price').textContent = `Rango estimado según decoración: ${formatCurrency(low)} - ${formatCurrency(high)} MXN`;
+      }
+
+      return { lines, total };
+    }
+
+    function resetQuoteBuilder() {
+      state.quoteQuantities = { galletas: 0, pastelitos: 0, snacks: 0 };
+      document.getElementById('q-qty-galletas').textContent = '0';
+      document.getElementById('q-qty-pastelitos').textContent = '0';
+      document.getElementById('q-qty-snacks').textContent = '0';
+      document.getElementById('quote-event-type').value = '';
+      document.getElementById('quote-event-date').value = '';
+      document.getElementById('quote-guests').value = '0';
+      document.getElementById('quote-guests-display').textContent = '0 personas';
+      document.getElementById('quote-cake-size').value = '0';
+      document.getElementById('quote-cake-flavor').value = '';
+      document.getElementById('quote-cake-theme').value = '';
+      document.getElementById('extra-labels').checked = false;
+      document.getElementById('extra-giftwrap').checked = false;
+      document.getElementById('extra-delivery').checked = false;
+      const qForm = document.getElementById('quote-form');
+      if (qForm) qForm.reset();
+      recalculateQuote();
+    }
+
+    async function submitQuoteForm(e) {
+      e.preventDefault();
+      const { lines, total } = recalculateQuote();
+      if (lines.length === 0) {
+        showToast('Selecciona al menos un producto para tu cotización', 'error');
+        return;
+      }
+
+      const folio = `COT-${101 + state.quotes.length}`;
+      const docId = `${folio}-${Date.now().toString().slice(-4)}`;
+      const eventType = document.getElementById('quote-event-type').value || 'Evento Especial';
+      const eventDate = document.getElementById('quote-event-date').value || 'Por definir';
+      const guests = Number(document.getElementById('quote-guests').value) || 0;
+      const cakeFlavor = document.getElementById('quote-cake-flavor').value.trim();
+      const cakeTheme = document.getElementById('quote-cake-theme').value.trim();
+      const clientName = document.getElementById('quote-client-name').value.trim();
+      const clientPhone = document.getElementById('quote-client-phone').value.trim();
+      const clientNotes = document.getElementById('quote-client-notes').value.trim();
+
+      let extraCakeInfo = '';
+      if (Number(document.getElementById('quote-cake-size').value) > 0 && (cakeFlavor || cakeTheme)) {
+        extraCakeInfo = ` [Pastel: ${cakeFlavor || 'Sabor a definir'}${cakeTheme ? `, Temática: ${cakeTheme}` : ''}]`;
+      }
+
+      const summaryText = lines.map(l => l.label).join(', ') + extraCakeInfo;
+
+      const newQuote = {
+        id: docId,
+        folio,
+        timestamp: Date.now(),
+        createdAt: new Date().toLocaleString('es-MX', { dateStyle: 'short', timeStyle: 'short' }),
+        clientName,
+        clientPhone,
+        eventType,
+        eventDate,
+        guests,
+        summary: summaryText,
+        estimatedTotal: total,
+        notes: clientNotes,
+        status: 'Nueva'
+      };
+
+      state.quotes.unshift(newQuote);
+      writeLocal(STORAGE_KEYS.quotes, state.quotes);
+      if (state.isAdminAuthenticated) {
+        renderAdminDashboard();
+      }
+
+      if (db && currentUser) {
+        try {
+          await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'cotizaciones', docId), newQuote);
+        } catch (err) {
+          console.error('Error guardando cotización:', err);
+        }
+      }
+
+      const waMessage =
+`✨ *COTIZACIÓN DE EVENTO HAPPY ROD* 🦕
+*Folio:* #${newQuote.folio}
+*Cliente:* ${newQuote.clientName}
+*WhatsApp:* ${newQuote.clientPhone}
+*Evento:* ${newQuote.eventType}${newQuote.guests > 0 ? ` (${newQuote.guests} personas)` : ''}
+*Fecha del Evento:* ${newQuote.eventDate}
+
+*Postres Cotizados:*
+${lines.map(l => `• ${l.label} (${formatCurrency(l.price)})`).join('\n')}${extraCakeInfo ? `\n🎂 *Detalle Pastel:*${extraCakeInfo}` : ''}
+
+*Presupuesto Estimado:* ${formatCurrency(newQuote.estimatedTotal)} MXN${newQuote.notes ? `\n*Notas:* ${newQuote.notes}` : ''}
+
+_Enviado desde el Cotizador Web Happy Rod_ ♡`;
+
+      const cleanPhone = formatWhatsAppLinkNumber(state.settings.whatsappNumber);
+      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(waMessage)}`;
+
+      resetQuoteBuilder();
+
+      showConfirmationModal(
+        'Cotización Registrada',
+        `#${newQuote.folio}`,
+        'Guardamos tu cotización correctamente y abrimos WhatsApp para confirmarla contigo.',
+        `<div class="font-bold text-choco-900 mb-1">${newQuote.eventType}${newQuote.guests > 0 ? ` • ${newQuote.guests} invitados` : ''}</div>` +
+        lines.map(l => `<div>• ${l.label} — ${formatCurrency(l.price)}</div>`).join('') +
+        `<div class="pt-1.5 mt-1.5 border-t border-terra-500/20 font-extrabold">Total estimado: ${formatCurrency(newQuote.estimatedTotal)} MXN</div>`,
+        waUrl
+      );
+
+      window.open(waUrl, '_blank', 'noopener');
+    }
+
+    // =========================================================================
+    // 10. ESTILOS DE ESTATUS Y PANEL DE ADMINISTRACIÓN EN TIEMPO REAL
+    // =========================================================================
+    function getStatusBadgeClass(status) {
+      switch (status) {
+        case 'Pendiente': return 'bg-amber-100 text-amber-800 border-amber-300';
+        case 'En preparación': return 'bg-sky-100 text-sky-800 border-sky-300';
+        case 'Listo / Entregado':
+        case 'Confirmada': return 'bg-sage-100 text-sage-600 border-sage-300';
+        case 'Cancelado': return 'bg-rose-100 text-rose-800 border-rose-300';
+        default: return 'bg-terra-100 text-terra-700 border-terra-300';
+      }
+    }
+
+    function openAdminGate() {
+      if (state.isAdminAuthenticated) {
+        navigateTo('admin');
+        return;
+      }
+      document.getElementById('admin-pin-input').value = '';
+      const modal = document.getElementById('admin-pin-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => document.getElementById('admin-pin-input').focus(), 100);
+    }
+
+    function closeAdminPinModal() {
+      const modal = document.getElementById('admin-pin-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function verifyAdminPin(e) {
+      e.preventDefault();
+      const inputPin = document.getElementById('admin-pin-input').value.trim();
+      if (inputPin === state.settings.adminPin) {
+        state.isAdminAuthenticated = true;
+        closeAdminPinModal();
+        showToast('Bienvenido al Panel Happy Rod');
+        navigateTo('admin');
+      } else {
+        showToast('PIN incorrecto. Intenta de nuevo.', 'error');
+      }
+    }
+
+    function logoutAdmin() {
+      state.isAdminAuthenticated = false;
+      navigateTo('catalogo');
+      showToast('Sesión de administrador cerrada');
+    }
+
+    function switchAdminTab(tabName) {
+      state.activeAdminTab = tabName;
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        if (btn.dataset.adminTab === tabName) {
+          btn.classList.add('bg-terra-500', 'text-white');
+          btn.classList.remove('bg-cream-200', 'text-choco-800');
+        } else {
+          btn.classList.remove('bg-terra-500', 'text-white');
+          btn.classList.add('bg-cream-200', 'text-choco-800');
+        }
+      });
+
+      document.querySelectorAll('.admin-subpanel').forEach(p => p.classList.add('hidden'));
+      document.getElementById(`admin-panel-${tabName}`).classList.remove('hidden');
+
+      if (tabName === 'pedidos') renderAdminOrders();
+      if (tabName === 'cotizaciones') renderAdminQuotes();
+      if (tabName === 'productos') renderAdminProducts();
+      if (tabName === 'config') loadAdminSettingsForm();
+    }
+
+    function renderAdminDashboard() {
+      const totalSales = state.orders
+        .filter(o => o.status !== 'Cancelado')
+        .reduce((acc, o) => acc + Number(o.total), 0);
+      const pendingOrders = state.orders.filter(o => o.status === 'Pendiente' || o.status === 'En preparación').length;
+      const newQuotes = state.quotes.filter(q => q.status === 'Nueva').length;
+
+      document.getElementById('admin-metrics').innerHTML = `
+        <div class="card-paper rounded-2xl p-4">
+          <span class="text-[11px] font-bold uppercase text-choco-700">Ventas Registradas</span>
+          <p class="font-brand text-2xl sm:text-3xl font-extrabold text-choco-900 mt-1">${formatCurrency(totalSales)}</p>
+        </div>
+        <div class="card-paper rounded-2xl p-4">
+          <span class="text-[11px] font-bold uppercase text-choco-700">Pedidos Activos</span>
+          <p class="font-brand text-2xl sm:text-3xl font-extrabold text-terra-600 mt-1">${pendingOrders}</p>
+        </div>
+        <div class="card-paper rounded-2xl p-4">
+          <span class="text-[11px] font-bold uppercase text-choco-700">Cotizaciones Nuevas</span>
+          <p class="font-brand text-2xl sm:text-3xl font-extrabold text-sage-600 mt-1">${newQuotes}</p>
+        </div>
+        <div class="card-paper rounded-2xl p-4">
+          <span class="text-[11px] font-bold uppercase text-choco-700">Postres en Menú</span>
+          <p class="font-brand text-2xl sm:text-3xl font-extrabold text-choco-900 mt-1">${state.products.length}</p>
+        </div>
+      `;
+
+      switchAdminTab(state.activeAdminTab);
+    }
+
+    function renderAdminOrders() {
+      const filter = document.getElementById('admin-order-filter').value;
+      const list = document.getElementById('admin-orders-list');
+      const filtered = state.orders.filter(o => filter === 'ALL' || o.status === filter);
+
+      if (filtered.length === 0) {
+        list.innerHTML = `
+          <div class="card-paper rounded-3xl p-10 text-center space-y-1.5">
+            <div class="text-3xl">✨</div>
+            <p class="font-brand text-xl font-bold text-choco-900">Aún no hay pedidos registrados</p>
+            <p class="text-xs text-choco-700">Cuando un cliente realice un pedido desde la tienda aparecerá aquí al instante.</p>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = filtered.map(o => {
+        const cleanClientPhone = formatWhatsAppLinkNumber(o.customerPhone);
+        const waClientLink = `https://wa.me/${cleanClientPhone}?text=${encodeURIComponent(`¡Hola ${o.customerName}! Te escribimos de Happy Rod respecto a tu pedido #${o.folio} (${o.status}).`)}`;
+
+        return `
+          <div class="card-paper rounded-3xl p-5 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-terra-500/20 pb-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-brand text-xl font-bold text-choco-900">#${o.folio}</span>
+                  <span class="font-bold text-sm text-choco-800">• ${o.customerName}</span>
+                </div>
+                <p class="text-xs text-choco-700">Tel: ${o.customerPhone} • Creado: ${o.createdAt}</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <select onchange="updateOrderStatus('${o.id}', this.value)" class="rounded-full border px-3 py-1 text-xs font-extrabold cursor-pointer ${getStatusBadgeClass(o.status)}">
+                  ${['Pendiente', 'En preparación', 'Listo / Entregado', 'Cancelado'].map(st =>
+                    `<option value="${st}" ${o.status === st ? 'selected' : ''}>${st}</option>`
+                  ).join('')}
+                </select>
+                <a href="${waClientLink}" target="_blank" rel="noopener" class="btn-sage px-3 py-1 rounded-full text-xs font-bold">
+                  💬 WhatsApp
+                </a>
+                <button onclick="deleteOrderRecord('${o.id}')" class="px-2.5 py-1 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold" title="Eliminar registro">
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-cream-100/80 rounded-2xl p-3 text-xs space-y-1">
+              ${o.items.map(i => `<div>• <strong>${i.qty}x ${i.name}</strong> ${i.detail ? `<span class="text-choco-700">(${i.detail})</span>` : ''} — ${formatCurrency(i.subtotal)}</div>`).join('')}
+              ${o.discount > 0 ? `<div class="text-sage-600 font-bold">Descuento Promo 3x2 aplicado: -${formatCurrency(o.discount)}</div>` : ''}
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div class="text-choco-700">
+                <strong>Entrega:</strong> ${o.deliveryType}${o.address ? ` (${o.address})` : ''} • <strong>Fecha:</strong> ${o.deliveryDate} ${o.deliveryTime} • <strong>Pago:</strong> ${o.paymentMethod}
+                ${o.notes ? `<div class="text-terra-700 font-semibold mt-0.5">Nota: "${o.notes}"</div>` : ''}
+              </div>
+              <div class="font-brand text-xl font-extrabold text-choco-900">
+                Total: ${formatCurrency(o.total)} MXN
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      const idx = state.orders.findIndex(o => o.id === orderId);
+      if (idx > -1) {
+        state.orders[idx].status = newStatus;
+        writeLocal(STORAGE_KEYS.orders, state.orders);
+        renderAdminDashboard();
+      }
+      if (db && currentUser) {
+        try {
+          await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pedidos', orderId), { status: newStatus });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      showToast(`Estatus actualizado a "${newStatus}"`);
+    }
+
+    async function deleteOrderRecord(orderId) {
+      state.orders = state.orders.filter(o => o.id !== orderId);
+      writeLocal(STORAGE_KEYS.orders, state.orders);
+      renderAdminDashboard();
+      if (db && currentUser) {
+        try {
+          await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pedidos', orderId));
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      showToast('Pedido eliminado');
+    }
+
+    function renderAdminQuotes() {
+      const list = document.getElementById('admin-quotes-list');
+      if (state.quotes.length === 0) {
+        list.innerHTML = `
+          <div class="card-paper rounded-3xl p-10 text-center space-y-1.5">
+            <div class="text-3xl">✨</div>
+            <p class="font-brand text-xl font-bold text-choco-900">Aún no hay cotizaciones registradas</p>
+            <p class="text-xs text-choco-700">Las solicitudes enviadas desde el Cotizador de Eventos aparecerán aquí en tiempo real.</p>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = state.quotes.map(q => {
+        const cleanPhone = formatWhatsAppLinkNumber(q.clientPhone);
+        const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`¡Hola ${q.clientName}! Te saludamos de Happy Rod sobre tu cotización #${q.folio} para tu evento de ${q.eventType} (${formatCurrency(q.estimatedTotal)} MXN).`)}`;
+
+        return `
+          <div class="card-paper rounded-3xl p-5 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-terra-500/20 pb-3">
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="font-brand text-xl font-bold text-choco-900">#${q.folio}</span>
+                  <span class="font-bold text-sm text-choco-800">• ${q.clientName}</span>
+                  <span class="text-xs bg-sage-100 text-sage-600 font-bold px-2.5 py-0.5 rounded-full">${q.eventType} (${q.guests} pers.)</span>
+                </div>
+                <p class="text-xs text-choco-700">Tel: ${q.clientPhone} • Fecha Evento: <strong>${q.eventDate}</strong></p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <select onchange="updateQuoteStatus('${q.id}', this.value)" class="rounded-full border px-3 py-1 text-xs font-extrabold cursor-pointer ${getStatusBadgeClass(q.status)}">
+                  ${['Nueva', 'Cotizada / Enviada', 'Confirmada', 'Cancelado'].map(st =>
+                    `<option value="${st}" ${q.status === st ? 'selected' : ''}>${st}</option>`
+                  ).join('')}
+                </select>
+                <a href="${waLink}" target="_blank" rel="noopener" class="btn-sage px-3 py-1 rounded-full text-xs font-bold">
+                  💬 Responder
+                </a>
+                <button onclick="deleteQuoteRecord('${q.id}')" class="px-2.5 py-1 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold" title="Eliminar registro">
+                  ✕
+                </button>
+              </div>
+            </div>
+            <p class="text-xs text-choco-800 bg-cream-100/80 p-3 rounded-2xl leading-relaxed">
+              <strong>Requerimientos:</strong> ${q.summary}
+              ${q.notes ? `<br><span class="text-terra-700 font-semibold">Notas: ${q.notes}</span>` : ''}
+            </p>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-choco-700">Recibida: ${q.createdAt}</span>
+              <span class="font-brand text-xl font-extrabold text-choco-900">Estimado: ${formatCurrency(q.estimatedTotal)} MXN</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function updateQuoteStatus(quoteId, newStatus) {
+      const idx = state.quotes.findIndex(q => q.id === quoteId);
+      if (idx > -1) {
+        state.quotes[idx].status = newStatus;
+        writeLocal(STORAGE_KEYS.quotes, state.quotes);
+        renderAdminDashboard();
+      }
+      if (db && currentUser) {
+        try {
+          await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'cotizaciones', quoteId), { status: newStatus });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      showToast(`Cotización marcada como "${newStatus}"`);
+    }
+
+    async function deleteQuoteRecord(quoteId) {
+      state.quotes = state.quotes.filter(q => q.id !== quoteId);
+      writeLocal(STORAGE_KEYS.quotes, state.quotes);
+      renderAdminDashboard();
+      if (db && currentUser) {
+        try {
+          await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'cotizaciones', quoteId));
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      showToast('Cotización eliminada');
+    }
+
+    function renderAdminProducts() {
+      const list = document.getElementById('admin-products-list');
+      list.innerHTML = state.products.map(p => `
+        <div class="card-paper rounded-3xl p-4 flex gap-3.5 items-center justify-between">
+          <div class="w-16 h-16 rounded-2xl overflow-hidden bg-cream-200 shrink-0 border border-terra-500/20">
+            ${getProductVisualHTML(p)}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] font-bold uppercase text-sage-600">${p.category}</span>
+              ${p.soldOut ? '<span class="text-[10px] font-extrabold bg-rose-100 text-rose-700 px-2 py-0.2 rounded-full">Agotado</span>' : ''}
+            </div>
+            <h4 class="font-bold text-sm text-choco-900 truncate">${p.name}</h4>
+            <p class="font-brand text-base font-extrabold text-terra-700">${formatCurrency(p.price)} MXN</p>
+          </div>
+          <div class="flex flex-col gap-1.5 shrink-0">
+            <button onclick="openProductEditorModal('${p.id}')" class="px-3 py-1 rounded-xl bg-cream-200 hover:bg-terra-100 text-xs font-bold text-choco-900">
+              Editar
+            </button>
+            <button onclick="toggleProductSoldOut('${p.id}')" class="px-3 py-1 rounded-xl bg-cream-200 hover:bg-terra-100 text-xs font-bold text-choco-800">
+              ${p.soldOut ? 'Activar' : 'Agotar'}
+            </button>
+            <button onclick="deleteProduct('${p.id}')" class="px-3 py-1 rounded-xl bg-rose-50 hover:bg-rose-100 text-xs font-bold text-rose-700">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function toggleProductSoldOut(id) {
+      const prod = state.products.find(p => p.id === id);
+      if (!prod) return;
+      const nextVal = !prod.soldOut;
+      prod.soldOut = nextVal;
+      writeLocal(STORAGE_KEYS.products, state.products);
+      renderProductsGrid();
+      renderAdminProducts();
+
+      if (db && currentUser) {
+        await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'productos', id), { soldOut: nextVal });
+      }
+      showToast(nextVal ? `"${prod.name}" marcado como Agotado` : `"${prod.name}" disponible nuevamente`);
+    }
+
+    async function deleteProduct(id) {
+      state.products = state.products.filter(p => p.id !== id);
+      writeLocal(STORAGE_KEYS.products, state.products);
+      renderCategoryFilters();
+      renderProductsGrid();
+      renderAdminDashboard();
+
+      if (db && currentUser) {
+        await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'productos', id));
+      }
+      showToast('Producto eliminado del catálogo');
+    }
+
+    // Modal Editor de Productos
+    function openProductEditorModal(productId = null) {
+      const isEdit = Boolean(productId);
+      document.getElementById('pe-modal-title').textContent = isEdit ? 'Editar Postre' : 'Agregar Nuevo Postre';
+
+      if (isEdit) {
+        const p = state.products.find(item => item.id === productId);
+        document.getElementById('pe-id').value = p.id;
+        document.getElementById('pe-name').value = p.name;
+        document.getElementById('pe-category').value = p.category;
+        document.getElementById('pe-price').value = p.price;
+        document.getElementById('pe-desc').value = p.description;
+        document.getElementById('pe-badge').value = p.badge || '';
+        document.getElementById('pe-flavors').value = (p.flavors || []).join(', ');
+        document.getElementById('pe-variants').value = (p.variants || []).map(v => `${v.label}:${v.price}`).join(', ');
+        document.getElementById('pe-image-url').value = p.imageUrl || '';
+        document.getElementById('pe-soldout').checked = !!p.soldOut;
+      } else {
+        document.getElementById('pe-id').value = '';
+        document.getElementById('pe-name').value = '';
+        document.getElementById('pe-category').value = 'Pastelitos Individuales';
+        document.getElementById('pe-price').value = '';
+        document.getElementById('pe-desc').value = '';
+        document.getElementById('pe-badge').value = '';
+        document.getElementById('pe-flavors').value = '';
+        document.getElementById('pe-variants').value = '';
+        document.getElementById('pe-image-url').value = '';
+        document.getElementById('pe-soldout').checked = false;
+      }
+
+      const modal = document.getElementById('product-editor-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProductEditorModal() {
+      const modal = document.getElementById('product-editor-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        document.getElementById('pe-image-url').value = evt.target.result;
+        showToast('Imagen cargada lista para guardar');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function saveProductFromEditor(e) {
+      e.preventDefault();
+      const id = document.getElementById('pe-id').value;
+      const name = document.getElementById('pe-name').value.trim();
+      const category = document.getElementById('pe-category').value;
+      const price = Number(document.getElementById('pe-price').value);
+      const description = document.getElementById('pe-desc').value.trim();
+      const badge = document.getElementById('pe-badge').value.trim();
+      const flavorsRaw = document.getElementById('pe-flavors').value.trim();
+      const variantsRaw = document.getElementById('pe-variants').value.trim();
+      const imageUrl = document.getElementById('pe-image-url').value.trim();
+      const soldOut = document.getElementById('pe-soldout').checked;
+
+      const flavors = flavorsRaw ? flavorsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+      const variants = variantsRaw
+        ? variantsRaw.split(',').map(pair => {
+            const [label, val] = pair.split(':');
+            if (label && val && !isNaN(Number(val.trim()))) {
+              return { label: label.trim(), price: Number(val.trim()) };
+            }
+            return null;
+          }).filter(Boolean)
+        : [];
+
+      if (id) {
+        const idx = state.products.findIndex(p => p.id === id);
+        if (idx > -1) {
+          state.products[idx] = {
+            ...state.products[idx],
+            name, category, price, description, badge, flavors, variants, imageUrl, soldOut
+          };
+        }
+        writeLocal(STORAGE_KEYS.products, state.products);
+        renderCategoryFilters();
+        renderProductsGrid();
+        renderAdminDashboard();
+
+        if (db && currentUser) {
+          const productsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'productos');
+          await updateDoc(doc(productsColRef, id), {
+            name, category, price, description, badge, flavors, variants, imageUrl, soldOut
+          });
+        }
+        showToast('Producto actualizado');
+      } else {
+        const newId = 'prod-' + Date.now();
+        const newProd = {
+          id: newId,
+          name,
+          category,
+          price,
+          badge,
+          description,
+          variants,
+          flavors,
+          isPromo3x2: false,
+          isSinglePastelito: false,
+          soldOut,
+          artKey: 'pastel',
+          imageUrl,
+          orderIndex: state.products.length + 1
+        };
+        state.products.push(newProd);
+        writeLocal(STORAGE_KEYS.products, state.products);
+        renderCategoryFilters();
+        renderProductsGrid();
+        renderAdminDashboard();
+
+        if (db && currentUser) {
+          const productsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'productos');
+          await setDoc(doc(productsColRef, newId), newProd);
+        }
+        showToast('Nuevo postre agregado al catálogo');
+      }
+
+      closeProductEditorModal();
+    }
+
+    // Configuración Admin en la Nube + Local
+    function loadAdminSettingsForm() {
+      document.getElementById('cfg-whatsapp').value = state.settings.whatsappNumber;
+      document.getElementById('cfg-facebook').value = state.settings.facebookName || 'HAPPY ROD';
+      document.getElementById('cfg-instagram').value = state.settings.instagramHandle || '@happy_rod.postres';
+      document.getElementById('cfg-pin').value = state.settings.adminPin;
+      document.getElementById('cfg-promo3x2').checked = !!state.settings.promo3x2Active;
+    }
+
+    async function saveAdminSettings(e) {
+      e.preventDefault();
+      const updated = {
+        whatsappNumber: document.getElementById('cfg-whatsapp').value.trim(),
+        facebookName: document.getElementById('cfg-facebook').value.trim() || 'HAPPY ROD',
+        instagramHandle: document.getElementById('cfg-instagram').value.trim() || '@happy_rod.postres',
+        adminPin: document.getElementById('cfg-pin').value.trim() || '1234',
+        promo3x2Active: document.getElementById('cfg-promo3x2').checked
+      };
+
+      state.settings = { ...updated };
+      writeLocal(STORAGE_KEYS.settings, state.settings);
+      applySettingsToUI();
+      renderProductsGrid();
+      updateCartUI();
+
+      if (db && currentUser) {
+        await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'configuracion', 'general'), updated);
+      }
+      showToast('Configuración guardada correctamente');
+    }
+
+    async function clearAllOrdersAndQuotes() {
+      const oldOrders = [...state.orders];
+      const oldQuotes = [...state.quotes];
+      state.orders = [];
+      state.quotes = [];
+      writeLocal(STORAGE_KEYS.orders, []);
+      writeLocal(STORAGE_KEYS.quotes, []);
+      renderAdminDashboard();
+
+      if (db && currentUser) {
+        for (const o of oldOrders) {
+          await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'pedidos', o.id));
+        }
+        for (const q of oldQuotes) {
+          await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'cotizaciones', q.id));
+        }
+      }
+      showToast('Base de datos limpia: 0 pedidos y 0 cotizaciones');
+    }
+
+    async function resetDefaultCatalog() {
+      const oldProducts = [...state.products];
+      state.products = [...DEFAULT_PRODUCTS];
+      writeLocal(STORAGE_KEYS.products, state.products);
+      renderCategoryFilters();
+      renderProductsGrid();
+      renderAdminDashboard();
+
+      if (db && currentUser) {
+        const productsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'productos');
+        for (const p of oldProducts) {
+          await deleteDoc(doc(productsColRef, p.id));
+        }
+        for (const defP of DEFAULT_PRODUCTS) {
+          await setDoc(doc(productsColRef, defP.id), defP);
+        }
+      }
+      showToast('Catálogo original de Happy Rod restaurado');
+    }
+
+    // Exponer funciones al ámbito global para eventos onclick/onsubmit
+    Object.assign(window, {
+      navigateTo,
+      setCategoryFilter,
+      openProductModal,
+      closeProductModal,
+      selectModalVariant,
+      selectModalFlavor,
+      changeModalQty,
+      confirmAddToCart,
+      toggleCartDrawer,
+      updateCartItemQty,
+      toggleAddressField,
+      submitOrder,
+      closeConfirmationModal,
+      updateGuestsSlider,
+      setQuickGuests,
+      adjustQuoteItem,
+      recalculateQuote,
+      submitQuoteForm,
+      openAdminGate,
+      closeAdminPinModal,
+      verifyAdminPin,
+      logoutAdmin,
+      switchAdminTab,
+      renderAdminOrders,
+      updateOrderStatus,
+      deleteOrderRecord,
+      updateQuoteStatus,
+      deleteQuoteRecord,
+      toggleProductSoldOut,
+      deleteProduct,
+      openProductEditorModal,
+      closeProductEditorModal,
+      handleImageUpload,
+      saveProductFromEditor,
+      saveAdminSettings,
+      clearAllOrdersAndQuotes,
+      resetDefaultCatalog
+    });
+
+    // =========================================================================
+    // 12. ARRANQUE INICIAL
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      applySettingsToUI();
+      renderCategoryFilters();
+      renderProductsGrid();
+      updateCartUI();
+      resetQuoteBuilder();
+
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+      const orderDateInput = document.getElementById('order-date');
+      if (orderDateInput) orderDateInput.value = tomorrow;
+
+      navigateTo('catalogo');
+      initRealtimeDatabase();
+    });
+  </script>
+</body>
+</html>
