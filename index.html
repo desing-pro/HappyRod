@@ -1167,6 +1167,16 @@
     ];
 
     // Inicialización segura de Firebase (funciona tanto en entorno nube como en archivo local)
+   const HAPPY_ROD_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDW5FPrgjL0-JLkTqJNLko2EMAqNzUdKkA",
+      authDomain: "happy-rod.firebaseapp.com",
+      projectId: "happy-rod",
+      storageBucket: "happy-rod.firebasestorage.app",
+      messagingSenderId: "581261464790",
+      appId: "1:581261464790:web:b54ce5592f52cb627b2577"
+    };
+
+    // Inicialización segura de Firebase (funciona tanto en nube con Firebase como en local)
     let app = null;
     let auth = null;
     let db = null;
@@ -1174,7 +1184,11 @@
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'happy-rod-store';
 
     try {
-      if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+      if (HAPPY_ROD_FIREBASE_CONFIG.apiKey && HAPPY_ROD_FIREBASE_CONFIG.projectId) {
+        app = initializeApp(HAPPY_ROD_FIREBASE_CONFIG);
+        auth = getAuth(app);
+        db = getFirestore(app);
+      } else if (typeof __firebase_config !== 'undefined' && __firebase_config) {
         const firebaseConfig = JSON.parse(__firebase_config);
         app = initializeApp(firebaseConfig);
         auth = getAuth(app);
